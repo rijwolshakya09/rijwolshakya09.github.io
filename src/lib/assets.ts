@@ -1,6 +1,5 @@
 /**
- * Prepends the basePath to static asset URLs so they resolve correctly
- * on both local dev (no prefix) and GitHub Pages sub-path deployments.
+ * Returns the asset path. No basePath needed since this is a GitHub user
+ * pages repo (rijwolshakya09.github.io) served at the root URL.
  */
-export const assetPath = (path: string): string =>
-  `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
+export const assetPath = (path: string): string => path;

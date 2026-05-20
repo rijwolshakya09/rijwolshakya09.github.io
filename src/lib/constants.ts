@@ -3,7 +3,7 @@ export const SITE_METADATA = {
   title: "Rijwol Shakya — Flutter & Mobile Developer",
   description:
     "Flutter developer with 2+ years of professional experience building cross-platform mobile applications for Android and iOS. Skilled in Clean Architecture, Riverpod, GetX, Firebase, and REST API integration.",
-  url: "https://rijwolshakya09.github.io/my-portfolio",
+  url: "https://rijwolshakya09.github.io",
   ogImage: "/og-image.png",
   twitterHandle: "@rijwolshakya",
   location: "Kathmandu, Nepal",
