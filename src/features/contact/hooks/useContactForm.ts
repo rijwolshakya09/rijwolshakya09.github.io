@@ -1,32 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import type { ContactFormData } from "../types";
+import { FORMSPREE_ENDPOINT } from "@/lib/formspree";
+import { contactSchema, type ContactFormData } from "../types";
 
-const schema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  subject: z.string().min(4, "Subject must be at least 4 characters"),
-  message: z.string().min(20, "Message must be at least 20 characters"),
-});
-
-type Status = "idle" | "submitting" | "success" | "error";
+export type ContactStatus = "idle" | "submitting" | "success" | "error";
 
 export function useContactForm() {
-  const [status, setStatus] = useState<Status>("idle");
+  const [status, setStatus] = useState<ContactStatus>("idle");
+  const inFlight = useRef(false);
 
   const form = useForm<ContactFormData>({
-    resolver: zodResolver(schema),
-    defaultValues: { name: "", email: "", subject: "", message: "" },
+    resolver: zodResolver(contactSchema),
+    defaultValues: { name: "", email: "", subject: "", project: "", message: "" },
   });
 
   const onSubmit = async (data: ContactFormData) => {
+    if (inFlight.current) return;
+    inFlight.current = true;
     setStatus("submitting");
     try {
-      const res = await fetch("https://formspree.io/f/xykvegga", {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(data),
@@ -39,6 +35,8 @@ export function useContactForm() {
       }
     } catch {
       setStatus("error");
+    } finally {
+      inFlight.current = false;
     }
   };
 
