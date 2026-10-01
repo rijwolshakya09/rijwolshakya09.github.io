@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { type ButtonHTMLAttributes, forwardRef } from "react";
 
-type Variant = "primary" | "outline" | "ghost";
+type Variant = "primary" | "outline" | "ghost" | "gradient" | "glass";
 type Size = "sm" | "md" | "lg";
 
 export function buttonStyles({
@@ -9,6 +9,9 @@ export function buttonStyles({
   size = "md",
   className,
 }: { variant?: Variant; size?: Size; className?: string } = {}): string {
+  if (variant === "gradient" || variant === "glass") {
+    return cn("btn", variant === "gradient" ? "b1" : "b2", className);
+  }
   return cn(
     "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-[transform,background-color,color,border-color] duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none motion-reduce:hover:scale-100",
     variant === "primary" && "bg-primary text-on-primary",
