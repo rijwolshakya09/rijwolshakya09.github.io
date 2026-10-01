@@ -1,30 +1,40 @@
-import { Container } from "@/components/ui/Container";
-import { SectionTitle } from "@/components/ui/SectionTitle";
-import { Chip } from "@/components/ui/Chip";
-import { SKILLS_DATA } from "../data/skills.data";
+import { Reveal } from "@/components/ui/Reveal";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { CORE_SKILLS, SKILL_GROUPS } from "../data/skills.data";
+import { CoreSkillCard } from "./CoreSkillCard";
+import { SkillGroupCard } from "./SkillGroupCard";
 
 export function SkillsSection() {
   return (
-    <section id="toolkit" aria-labelledby="toolkit-heading" className="py-20 md:py-28">
-      <Container>
-        <SectionTitle id="toolkit-heading" title="Toolkit" />
-        <dl className="divide-y divide-line border-y border-line">
-          {SKILLS_DATA.map((g) => (
-            <div key={g.category} className="grid gap-3 py-6 md:grid-cols-[14rem_1fr] md:gap-10">
-              <dt className="font-semibold">{g.category}</dt>
-              <dd>
-                <ul className="flex flex-wrap gap-2">
-                  {g.skills.map((s) => (
-                    <li key={s}>
-                      <Chip>{s}</Chip>
-                    </li>
-                  ))}
-                </ul>
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </Container>
+    <section id="skills" aria-labelledby="skills-heading" className="aurora-section">
+      <div aria-hidden="true" className="blob" style={{ width: 380, height: 380, background: "var(--fuchsia)", right: -140, top: 120, opacity: 0.18 }} />
+      <SectionHeader
+        id="skills-heading"
+        eyebrow="Skills"
+        title="My"
+        highlight="toolkit"
+        lead="The technologies I use to take an app from Figma to the Play Store and App Store, and the level I work at with each."
+      />
+      <Reveal>
+        <h3 className="subh">Core technologies</h3>
+      </Reveal>
+      <div className="core">
+        {CORE_SKILLS.map((s, i) => (
+          <Reveal key={s.name} delay={(i % 4) * 80}>
+            <CoreSkillCard skill={s} />
+          </Reveal>
+        ))}
+      </div>
+      <Reveal>
+        <h3 className="subh mt-12">Everything I work with</h3>
+      </Reveal>
+      <div className="sgrid4">
+        {SKILL_GROUPS.map((g, i) => (
+          <Reveal key={g.title} delay={(i % 4) * 80}>
+            <SkillGroupCard group={g} />
+          </Reveal>
+        ))}
+      </div>
     </section>
   );
 }
