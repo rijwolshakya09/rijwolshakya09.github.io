@@ -4,9 +4,8 @@ import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
-import { Container } from "@/components/ui/Container";
-import { buttonStyles } from "@/components/ui/Button";
 import { useActiveSection } from "@/hooks/useActiveSection";
+import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { CV_PATH, NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -14,17 +13,10 @@ const SECTION_IDS = NAV_LINKS.map((l) => l.href.slice(1));
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const active = useActiveSection(SECTION_IDS);
+  const dir = useScrollDirection();
   const toggleRef = useRef<HTMLButtonElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -67,54 +59,55 @@ export function Header() {
   };
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 border-b transition-colors",
-        scrolled ? "border-line bg-background" : "border-transparent bg-transparent"
-      )}
+    <motion.header
+      className="fixed inset-x-0 top-3.5 z-50 flex justify-center px-4"
+      animate={{ y: dir === "down" && !open ? -96 : 0 }}
+      transition={{ type: "spring", stiffness: 260, damping: 30 }}
     >
-      <Container className="flex h-16 items-center justify-between">
-        <a href="#hero" className="flex min-h-12 items-center font-display text-lg font-extrabold">
-          Rijwol Shakya
+      <div className="nav-pill">
+        <a href="#hero" className="grad mr-2 font-display text-base font-extrabold" aria-label="Back to top">
+          RS
         </a>
 
         <nav aria-label="Main" className="hidden md:block">
-          <ul className="flex items-center gap-1">
-            {NAV_LINKS.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  aria-current={active === l.href.slice(1) ? "true" : undefined}
-                  className={cn(
-                    "flex min-h-12 items-center rounded-full px-4 text-sm font-medium transition-colors",
-                    active === l.href.slice(1) ? "text-primary" : "text-muted hover:text-foreground"
-                  )}
-                >
-                  {l.label}
-                </a>
-              </li>
-            ))}
+          <ul className="flex items-center">
+            {NAV_LINKS.map((l) => {
+              const isActive = active === l.href.slice(1);
+              return (
+                <li key={l.href}>
+                  <a href={l.href} aria-current={isActive ? "true" : undefined} className="nav-link isolate">
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-active"
+                        className="nav-active"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        aria-hidden
+                      />
+                    )}
+                    {l.label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
-        <div className="flex items-center gap-1">
-          <a href={CV_PATH} download className={buttonStyles({ variant: "outline", size: "sm", className: "hidden md:inline-flex" })}>
-            CV
-          </a>
-          <ThemeToggle />
-          <button
-            ref={toggleRef}
-            type="button"
-            onClick={() => setOpen(true)}
-            aria-label="Open menu"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            className="flex h-12 w-12 items-center justify-center rounded-full text-foreground md:hidden"
-          >
-            <Menu size={20} aria-hidden />
-          </button>
-        </div>
-      </Container>
+        <a href={CV_PATH} download className="nav-link hidden md:inline-flex">
+          CV ↓
+        </a>
+        <ThemeToggle />
+        <button
+          ref={toggleRef}
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-label="Open menu"
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          className="flex h-12 w-12 items-center justify-center rounded-full text-foreground md:hidden"
+        >
+          <Menu size={20} aria-hidden />
+        </button>
+      </div>
 
       <AnimatePresence>
         {open && (
@@ -125,7 +118,7 @@ export function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={close}
-              className="fixed inset-0 z-40 bg-foreground/40 md:hidden"
+              className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
               aria-hidden
             />
             <motion.div
@@ -140,22 +133,18 @@ export function Header() {
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
               transition={{ type: "spring", stiffness: 320, damping: 32 }}
-              className="fixed inset-x-0 bottom-0 z-50 rounded-t-3xl border-t border-line bg-surface px-4 pb-8 pt-4 md:hidden"
+              className={cn("sheet fixed inset-x-0 bottom-0 z-50 rounded-t-3xl px-4 pb-8 pt-4 md:hidden")}
             >
               <ul className="flex flex-col">
                 {NAV_LINKS.map((l) => (
                   <li key={l.href}>
-                    <a
-                      href={l.href}
-                      onClick={() => setOpen(false)}
-                      className="flex min-h-14 items-center rounded-xl px-3 font-display text-2xl font-extrabold"
-                    >
+                    <a href={l.href} onClick={() => setOpen(false)} className="flex min-h-14 items-center rounded-xl px-3 font-display text-2xl font-extrabold">
                       {l.label}
                     </a>
                   </li>
                 ))}
                 <li>
-                  <a href={CV_PATH} download className="flex min-h-14 items-center rounded-xl px-3 text-lg font-semibold text-primary">
+                  <a href={CV_PATH} download className="grad flex min-h-14 items-center rounded-xl px-3 text-lg font-bold">
                     Download CV
                   </a>
                 </li>
@@ -172,6 +161,6 @@ export function Header() {
           </>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

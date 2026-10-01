@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 vi.mock("next-themes", () => ({ useTheme: () => ({ resolvedTheme: "light", setTheme: vi.fn() }) }));
 
 import { Header } from "./Header";
+import { ScrollProgress } from "./ScrollProgress";
 
 describe("Header mobile menu", () => {
   it("opens a dialog, locks scroll, and closes on Esc with focus restored", async () => {
@@ -16,7 +17,7 @@ describe("Header mobile menu", () => {
     const dialog = screen.getByRole("dialog", { name: "Menu" });
     expect(dialog).toBeInTheDocument();
     expect(document.body.style.overflow).toBe("hidden");
-    await waitFor(() => expect(screen.getAllByRole("link", { name: "Work" }).at(-1)).toHaveFocus());
+    await waitFor(() => expect(screen.getAllByRole("link", { name: "About" }).at(-1)).toHaveFocus());
 
     await user.keyboard("{Escape}");
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
@@ -24,11 +25,16 @@ describe("Header mobile menu", () => {
     expect(screen.getByRole("button", { name: "Open menu" })).toHaveFocus();
   });
 
-  it("lists Work, Experience and Contact as in-page links", () => {
+  it("lists every section as an in-page link", () => {
     render(<Header />);
-    expect(screen.getAllByRole("link", { name: "Work" })[0]).toHaveAttribute("href", "#work");
-    expect(screen.getAllByRole("link", { name: "Experience" })[0]).toHaveAttribute("href", "#experience");
-    expect(screen.getAllByRole("link", { name: "Contact" })[0]).toHaveAttribute("href", "#contact");
+    for (const [name, href] of [["About", "#about"], ["Work", "#work"], ["Experience", "#experience"], ["Skills", "#skills"], ["Contact", "#contact"]]) {
+      expect(screen.getAllByRole("link", { name })[0]).toHaveAttribute("href", href);
+    }
+  });
+
+  it("renders the scroll progress bar hidden from assistive tech", () => {
+    const { container } = render(<><ScrollProgress /><Header /></>);
+    expect(container.querySelector("[data-progress]")).toHaveAttribute("aria-hidden", "true");
   });
 
   it("closes and unlocks scroll when the viewport grows past the mobile breakpoint", async () => {

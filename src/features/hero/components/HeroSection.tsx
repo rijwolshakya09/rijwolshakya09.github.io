@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { buttonStyles } from "@/components/ui/Button";
-import { SocialLinks } from "@/components/common/SocialLinks";
+import { SocialButtons } from "@/components/ui/SocialButtons";
 import { PhoneDemo } from "./PhoneDemo/PhoneDemo";
 import { AVAILABILITY, CV_PATH } from "@/lib/constants";
 
@@ -37,7 +37,7 @@ export function HeroSection() {
             <a href={CV_PATH} download className={buttonStyles({ variant: "outline", size: "lg" })}>
               Download CV
             </a>
-            <SocialLinks include={["github", "linkedin"]} className="ml-1" />
+            <SocialButtons />
           </div>
         </div>
 
