@@ -1,31 +1,59 @@
-import { Container } from "@/components/ui/Container";
-import { SectionTitle } from "@/components/ui/SectionTitle";
-import { CaseStudy } from "./CaseStudy";
+"use client";
+
+import { useRef, useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import { Reveal } from "@/components/ui/Reveal";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { CARD_PROJECTS, FEATURE_PROJECT, getProject } from "../data/projects.data";
+import type { ProjectId } from "../types";
+import { FeatureProject } from "./FeatureProject";
 import { ProjectCard } from "./ProjectCard";
-import { projectsByTier } from "../data/projects.data";
+import { CaseStudyModal } from "./CaseStudyModal";
 
 export function ProjectsSection() {
-  const [caseStudy] = projectsByTier("case-study");
+  const [openId, setOpenId] = useState<ProjectId | null>(null);
+  const trigger = useRef<HTMLElement | null>(null);
+
+  const open = (id: ProjectId) => (el: HTMLElement) => {
+    trigger.current = el;
+    setOpenId(id);
+  };
+
+  const storeCards = CARD_PROJECTS.filter((p) => p.screenshots.length > 0);
+  const otherCards = CARD_PROJECTS.filter((p) => p.screenshots.length === 0);
+
   return (
-    <section id="work" aria-labelledby="work-heading" className="py-20 md:py-28">
-      <Container>
-        <SectionTitle
-          id="work-heading"
-          title="Selected work"
-          intro="Production apps I've built, starting with the one I work on every day."
-        />
-        {caseStudy && <CaseStudy project={caseStudy} />}
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
-          {projectsByTier("featured").map((p) => (
-            <ProjectCard key={p.id} project={p} size="featured" />
-          ))}
-        </div>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {projectsByTier("compact").map((p) => (
-            <ProjectCard key={p.id} project={p} size="compact" />
-          ))}
-        </div>
-      </Container>
+    <section id="work" aria-labelledby="work-heading" className="aurora-section">
+      <div aria-hidden="true" className="blob" style={{ width: 420, height: 420, background: "var(--indigo)", left: -160, top: 200, opacity: 0.22 }} />
+      <SectionHeader
+        id="work-heading"
+        eyebrow="Featured work"
+        title="Projects I've"
+        highlight="shipped"
+        lead="Production apps live on the Play Store and App Store, plus open-source and full-stack side projects."
+      />
+      <Reveal>
+        <FeatureProject project={FEATURE_PROJECT} onOpen={open(FEATURE_PROJECT.id)} />
+      </Reveal>
+      <div className="pgrid">
+        {storeCards.map((p, i) => (
+          <Reveal key={p.id} delay={i * 80}>
+            <ProjectCard project={p} onOpen={open(p.id)} />
+          </Reveal>
+        ))}
+      </div>
+      <div className="pgrid two">
+        {otherCards.map((p, i) => (
+          <Reveal key={p.id} delay={i * 80}>
+            <ProjectCard project={p} onOpen={open(p.id)} />
+          </Reveal>
+        ))}
+      </div>
+      <AnimatePresence>
+        {openId && (
+          <CaseStudyModal key={openId} project={getProject(openId)} onClose={() => setOpenId(null)} returnFocusTo={trigger.current} />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
