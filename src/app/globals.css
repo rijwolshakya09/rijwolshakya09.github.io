@@ -12,12 +12,6 @@
   --on-primary: #ffffff;
   --line: #d5dbe3;
   --live: #16b67a;
-
-  /* Legacy aliases for old components — removed in Task 11 */
-  --surface-muted: var(--surface);
-  --border: var(--line);
-  --accent: var(--primary);
-  --primary-hover: var(--primary);
 }
 
 .dark {
@@ -42,12 +36,6 @@
   --color-live: var(--live);
   --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
-
-  /* Legacy — removed in Task 11 */
-  --color-surface-muted: var(--surface-muted);
-  --color-border: var(--border);
-  --color-accent: var(--accent);
-  --color-primary-hover: var(--primary-hover);
 }
 
 html {
@@ -79,17 +67,4 @@ section[id] {
 :focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 3px;
-}
-
-/* ── Legacy (old components) — removed in Task 11 ── */
-.glass {
-  background: var(--surface);
-  border: 1px solid var(--line);
-}
-.gradient-text {
-  color: var(--primary);
-}
-.section {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
 }

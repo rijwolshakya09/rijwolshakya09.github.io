@@ -8,7 +8,6 @@ const BANNED = ["1,065", "1,000+", "65+ fix", "29 feature branches", "29 active 
 
 // Removed as Tasks 5, 8, 11, 12 land — the array must be empty at the end.
 const PENDING = [
-  "src/features/about/components/AboutSection.tsx",
   "scripts/generate-og.mjs",
 ];
 
