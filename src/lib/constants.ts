@@ -1,9 +1,9 @@
 export const SITE_METADATA = {
   name: "Rijwol Shakya",
-  title: "Rijwol Shakya — Flutter & Mobile Developer",
+  title: "Rijwol Shakya — Flutter Developer",
   description:
     "Flutter developer in Kathmandu with 3+ years building production Android and iOS apps — payments, real-time tracking and rich push — with Clean Architecture, GetX, Riverpod and Firebase.",
-  url: "https://rijwolshakya09.github.io",
+  url: "https://rijwol.com.np",
   ogImage: "/og-image.png",
   twitterHandle: "@rijwolshakya",
   location: "Kathmandu, Nepal",

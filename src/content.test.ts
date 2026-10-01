@@ -6,11 +6,6 @@ import { EXPERIENCE_DATA } from "@/features/experience/data/experience.data";
 
 const BANNED = ["1,065", "1,000+", "65+ fix", "29 feature branches", "29 active feature branches", "2+ years"];
 
-// Removed as Tasks 5, 8, 11, 12 land — the array must be empty at the end.
-const PENDING = [
-  "scripts/generate-og.mjs",
-];
-
 function filesUnder(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
     const p = join(dir, name);
@@ -44,9 +39,7 @@ describe("no stale figures anywhere in source", () => {
   const files = [...filesUnder(join(process.cwd(), "src")), ...filesUnder(join(process.cwd(), "scripts"))];
   for (const banned of BANNED) {
     it(`never contains "${banned}"`, () => {
-      const hits = files
-        .filter((f) => !PENDING.some((p) => f.endsWith(p)))
-        .filter((f) => readFileSync(f, "utf8").includes(banned));
+      const hits = files.filter((f) => readFileSync(f, "utf8").includes(banned));
       expect(hits).toEqual([]);
     });
   }
