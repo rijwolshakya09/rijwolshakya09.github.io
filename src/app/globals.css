@@ -1,119 +1,95 @@
 @import "tailwindcss";
 
-/* ── Design Tokens ─────────────────────────────────────────── */
+/* Class-based dark mode (next-themes sets .dark on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  --background: #eef1f4;
   --surface: #ffffff;
-  --surface-muted: #f1f5f9;
-  --border: rgba(15, 23, 42, 0.08);
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
-  --accent: #8b5cf6;
-  --muted: #64748b;
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.5);
-  --glass-shadow: 0 8px 32px rgba(99, 102, 241, 0.08);
+  --foreground: #14202b;
+  --muted: #4a5866;
+  --primary: #2f5bff;
+  --on-primary: #ffffff;
+  --line: #d5dbe3;
+  --live: #16b67a;
+
+  /* Legacy aliases for old components — removed in Task 11 */
+  --surface-muted: var(--surface);
+  --border: var(--line);
+  --accent: var(--primary);
+  --primary-hover: var(--primary);
 }
 
 .dark {
-  --background: #020617;
-  --foreground: #f1f5f9;
-  --surface: #0f172a;
-  --surface-muted: #1e293b;
-  --border: rgba(241, 245, 249, 0.06);
-  --primary: #818cf8;
-  --primary-hover: #a5b4fc;
-  --accent: #a78bfa;
-  --muted: #94a3b8;
-  --glass-bg: rgba(15, 23, 42, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.06);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --background: #0f1a26;
+  --surface: #172433;
+  --foreground: #e6ecf2;
+  --muted: #a9b6c4;
+  --primary: #7c9bff;
+  --on-primary: #0f1a26;
+  --line: #263445;
+  --live: #34d399;
 }
 
-/* ── Tailwind Theme Extension ───────────────────────────────── */
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-line: var(--line);
+  --color-live: var(--live);
+  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+
+  /* Legacy — removed in Task 11 */
   --color-surface-muted: var(--surface-muted);
   --color-border: var(--border);
-  --color-primary: var(--primary);
-  --color-primary-hover: var(--primary-hover);
   --color-accent: var(--accent);
-  --color-muted: var(--muted);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-/* ── Base ───────────────────────────────────────────────────── */
-* {
-  box-sizing: border-box;
+  --color-primary-hover: var(--primary-hover);
 }
 
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: var(--font-sans);
 }
 
-/* ── Glassmorphism Utility ──────────────────────────────────── */
-.glass {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+section[id] {
+  scroll-margin-top: 5rem;
 }
 
-/* ── Gradient Text ──────────────────────────────────────────── */
-.gradient-text {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ── Scrollbar ──────────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--surface-muted);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 3px;
-}
-
-/* ── Selection ──────────────────────────────────────────────── */
 ::selection {
   background: var(--primary);
-  color: #ffffff;
+  color: var(--on-primary);
 }
 
-/* ── Focus Ring ─────────────────────────────────────────────── */
 :focus-visible {
   outline: 2px solid var(--primary);
-  outline-offset: 2px;
-  border-radius: 4px;
+  outline-offset: 3px;
 }
 
-/* ── Section Base ───────────────────────────────────────────── */
+/* ── Legacy (old components) — removed in Task 11 ── */
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.gradient-text {
+  color: var(--primary);
+}
 .section {
   padding-top: 5rem;
   padding-bottom: 5rem;
-}
-
-@media (min-width: 768px) {
-  .section {
-    padding-top: 7rem;
-    padding-bottom: 7rem;
-  }
 }
