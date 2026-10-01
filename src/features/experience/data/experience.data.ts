@@ -9,11 +9,11 @@ export const EXPERIENCE_DATA: ExperienceEntry[] = [
     period: "Dec 2025 – Present",
     current: true,
     responsibilities: [
-      "Developing and maintaining myDishHome — a production Flutter app with 1,000+ commits and 29 active feature branches serving DishHome subscribers across Nepal.",
+      "Building and maintaining myDishHome, a production Flutter app serving DishHome subscribers across Nepal, where I've authored 365 commits — 189 features and 89 fixes.",
       "Integrated 4 payment gateways (eSewa, Khalti, FonePay, GetPay) with intent-based flows and in-app WebView checkout for seamless billing experiences.",
       "Built a Technician Ticket Tracking system with real-time horizontal stepper UI allowing subscribers to track field technician visits end-to-end.",
       "Implemented iOS Notification Service Extension for rich push notifications (images) alongside FCM token refresh for zero-drop notification delivery.",
-      "Configured Firebase Crashlytics for real-time crash monitoring; reduced crash rate through systematic bug triage across 65+ fix commits.",
+      "Configured Firebase Crashlytics for real-time crash monitoring and drove systematic bug triage across 89 fix commits.",
       "Collaborated with UI/UX designers to translate Figma designs into pixel-perfect Flutter interfaces adhering to Clean Architecture with GetX.",
     ],
     tags: ["Flutter", "GetX", "Firebase", "Clean Architecture", "Dio", "REST APIs"],

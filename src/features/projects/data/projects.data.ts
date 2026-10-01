@@ -24,16 +24,20 @@ export const PROJECTS_DATA: Project[] = [
         description: "GetX controllers managing reactive state, with stateless view widgets consuming Obx streams.",
       },
     ],
+    // Personal figures from dmn-customer-mobile-app, all refs, merge commits excluded (measured 2026-10-01):
+    //   git rev-list --all --no-merges --author='rijwol.shakya@dishhome.com.np' --count
+    //   git log --all --no-merges --author='rijwol.shakya@dishhome.com.np' --format=%s | grep -ciE '^feat(\(.*\))?!?:'
+    //   (same grep with fix / refactor)
     metrics: [
-      { label: "Total Commits", value: "1,065+" },
-      { label: "Feature Branches", value: "29" },
-      { label: "feat: commits", value: "128" },
-      { label: "fix: commits", value: "65" },
-      { label: "Payment Gateways", value: "4" },
-      { label: "Refactor commits", value: "23" },
+      { label: "Commits", value: "365" },
+      { label: "Features", value: "189" },
+      { label: "Fixes", value: "89" },
+      { label: "Refactors", value: "29" },
+      { label: "Payment gateways", value: "4" },
+      { label: "Active", value: "Since Jan 2026" },
     ],
     highlights: [
-      "Integrated eSewa intent-based payment flow with native SDK and POST-verified status callbacks.",
+      "Integrated four payment gateways — eSewa, Khalti, FonePay and GetPay — with intent-based flows and in-app checkout.",
       "Built iOS Notification Service Extension for rich push notification images (FCM).",
       "Implemented biometric login with session refresh + JWT reauthorization flow for zero-logout UX.",
       "Technician Ticket Tracking with animated horizontal stepper showing real-time visit stages.",
