@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -12,10 +12,10 @@ import { CaseStudyModal } from "./CaseStudyModal";
 
 export function ProjectsSection() {
   const [openId, setOpenId] = useState<ProjectId | null>(null);
-  const trigger = useRef<HTMLElement | null>(null);
+  const [trigger, setTrigger] = useState<HTMLElement | null>(null);
 
   const open = (id: ProjectId) => (el: HTMLElement) => {
-    trigger.current = el;
+    setTrigger(el);
     setOpenId(id);
   };
 
@@ -51,7 +51,7 @@ export function ProjectsSection() {
       </div>
       <AnimatePresence>
         {openId && (
-          <CaseStudyModal key={openId} project={getProject(openId)} onClose={() => setOpenId(null)} returnFocusTo={trigger.current} />
+          <CaseStudyModal key={openId} project={getProject(openId)} onClose={() => setOpenId(null)} returnFocusTo={trigger} />
         )}
       </AnimatePresence>
     </section>

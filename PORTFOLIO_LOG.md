@@ -2,7 +2,7 @@
 **Project:** Rijwol Shakya — Developer Portfolio  
 **Tech Stack:** Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · Framer Motion  
 **Deployment:** GitHub Pages via static export (`output: 'export'`)  
-**Last Updated:** 2026-10-01
+**Last Updated:** 2026-10-01 (Session 4)
 
 ---
 
@@ -262,6 +262,16 @@ Spec: `docs/superpowers/specs/2026-10-01-portfolio-redesign-design.md` · Plan: 
 - **Removed:** About section, TechMarquee, ScrollProgress, ProjectModal, project filter, GlassCard/Badge/SectionHeading, `useScrollDirection`, `useReducedMotion`, `lib/assets.ts`, `public/icons/`, default Next SVGs.
 - **Fixed along the way:** `dark:` utilities ignored the theme toggle (no class variant); toggle no-op when theme was "system"; `FORMSPREE_ENDPOINT` held an invalid value (now the real `xykvegga` ID and actually used).
 - **Tests:** Vitest + Testing Library added (`npm test`).
+
+---
+
+### Session 4 — 2026-10-01: Aurora Glass redesign
+
+- The "Pocket" redesign (Session 3) was rejected by the user as too plain / CV-like; it was never pushed.
+- New design approved via live browser mockups (v1–v10): spec `docs/superpowers/specs/2026-10-01-aurora-glass-redesign-design.md`, plan `docs/superpowers/plans/2026-10-01-aurora-glass-redesign.md`, mockup `docs/superpowers/specs/aurora-glass-mockup/`.
+- Built on branch `aurora-redesign`: aurora/glass tokens (dark default + light), Sora/Manrope, 4px gradient scroll-progress bar, glass pill nav, hero with photo ring + orbiting logos + floating badges + typing roles + socials + tech marquee, About bento (live Kathmandu clock, count-ups, commit bars), Work (myDishHome feature with 3D phone of real screenshots + 5 tilt cards with real icons), per-project case-study modal with scroll-synced phone showcase, Experience/Education tabs with scroll-drawn timeline, detailed toolkit (proficiency rings + 8 groups), glass contact with GitHub/LinkedIn cards.
+- Real store links (official badges): myDishHome, Bizlevate, SalesMania (SalesManiaHD) on Play + App Store; Finance Tracker on Play; HG HUB internal; Rent-N-Read on GitHub. Assets in `public/apps`, `public/badges`, `public/icons`.
+- DNS: `rijwol.com.np` now on Cloudflare (jake/pearl.ns.cloudflare.com) and resolving to GitHub Pages IPs (verified 2026-10-01). Remaining: save the custom domain in GitHub Pages settings, then enable HTTPS.
 
 ---
 

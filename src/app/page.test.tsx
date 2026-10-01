@@ -6,9 +6,9 @@ vi.mock("next-themes", () => ({ useTheme: () => ({ resolvedTheme: "light", setTh
 import Home from "./page";
 
 describe("Home", () => {
-  it("renders the sections in order with no About section", () => {
+  it("renders every section in order", () => {
     const { container } = render(<Home />);
     const ids = [...container.querySelectorAll("main section[id]")].map((s) => s.id);
-    expect(ids).toEqual(["hero", "work", "experience", "toolkit", "contact"]);
+    expect(ids).toEqual(["hero", "about", "work", "experience", "skills", "contact"]);
   });
 });

@@ -15,10 +15,6 @@ export function CommitBars() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setOn(true);
-      return;
-    }
     const io = new IntersectionObserver(([e]) => {
       if (e.isIntersecting) {
         setOn(true);

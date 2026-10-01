@@ -39,7 +39,7 @@ src/
 2. **TypeScript:** Strict typing always. Zero usage of `any`. Define deep structures for Git commits and project objects.
 3. **Tailwind & Interactivity:** Use `clsx` or `tailwind-merge` for clean conditional styles. For dynamic UI, explicitly use `'use client';` strictly where interaction happens.
 4. **Performance & Access:** Target 100/100 Core Web Vitals. Use proper semantic HTML, accessible `aria-*` tags, and responsive layouts (`sm:`, `md:`, `lg:` breakpoints).
-5. **Tests:** `npm test` (Vitest + Testing Library). Keep component logic in pure functions where possible (see `PhoneDemo/phoneDemo.logic.ts`).
+5. **Tests:** `npm test` (Vitest + Testing Library). Keep component logic in pure functions where possible (see `src/lib/motion.ts`).
 
 ## 🎨 MODERN UI & ADVANCED THEMING CONFIGURATION
 
@@ -48,7 +48,7 @@ src/
 - **No Heavy Runtimes:** Do not use runtime CSS-in-JS frameworks (like legacy MUI or Ant Design) t o prevent layout shifts on static HTML pages.
 - **Tailwind Variables:** Use pure Tailwind CSS utility classes paired with shadcn/ui or HeroUI primitives.
 - **Flicker-Free Dark/Light Mode:** Use `next-themes` with class-based routing to ensure dark mode maps instantaneously without a white flash on page load.
-- **Design tokens:** Colors come only from the tokens in `src/app/globals.css` (`background, surface, foreground, muted, primary, on-primary, line, live`), with light and dark values. No glassmorphism, gradient blobs, or gradient text. Display type is Bricolage Grotesque (`font-display`); body type is Schibsted Grotesk.
+- **Design tokens (Aurora Glass):** Colours come only from the tokens in `src/app/globals.css` (`background, foreground, muted, muted-2, indigo, cyan, fuchsia, emerald, glass-bg, glass-border`), with dark (default) and light values. Glassmorphism, aurora gradients and gradient text ARE the design language. Complex effects live in `src/app/aurora.css` (`@layer components`, tokens only — brand colours for GitHub/LinkedIn/store badges are the exception). Display type is Sora (`font-display`); body type is Manrope. Visual source of truth: `docs/superpowers/specs/aurora-glass-mockup/index.html`.
 
 ### 2. Framer Motion Animation Rules
 
@@ -56,7 +56,7 @@ Every animation must feel organic, purposeful, and optimized.
 
 - **Physics-Based Over Tweens:** Use Framer Motion `spring` physics (`stiffness`, `damping`) rather than linear delays for fluid, modern movements.
 - **Micro-Interactions:** Apply subtle hover states on clickable targets (e.g., scale up by exactly `1.02`, never over-exaggerated).
-- **Motion budget:** One load moment (hero), user-driven motion everywhere else, and at most one scroll reveal per page (the Experience rule). No per-section fade-ins. `MotionConfig reducedMotion="user"` is set globally in `Providers.tsx`.
+- **Rich motion is intended:** scroll reveals (`Reveal`), count-ups, pointer tilt/glow, orbit, marquee, timeline draw, modal springs. Animate only transform/opacity/filter. Never hide content in server HTML (`Reveal` arms only after mount, hero is transform-only). Every CSS keyframe stops under `prefers-reduced-motion`; Framer uses `MotionConfig reducedMotion="user"` in `Providers.tsx`.
 - **Layout Animations:** Protect visual flow. Use `layoutId` for smooth tab switching or layout morphs.
 - **Accessibility (Crucial):** Respect the system settings of users. Wrap all major animations or transitions within a check for `window.matchMedia('(prefers-reduced-motion: reduce)')` to disable them if requested.
 
