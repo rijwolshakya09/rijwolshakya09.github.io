@@ -1,11 +1,6 @@
-export type ProjectTag = "Flutter" | "React Native" | "React" | "Node.js" | "JavaScript";
+export type ProjectTier = "case-study" | "featured" | "compact";
 
-export interface ArchLayer {
-  label: string;
-  description: string;
-}
-
-export interface CommitMetric {
+export interface ProjectMetric {
   label: string;
   value: string;
 }
@@ -15,12 +10,10 @@ export interface Project {
   title: string;
   subtitle: string;
   description: string;
-  tags: ProjectTag[];
   techStack: string[];
   architecture: string;
-  archLayers: ArchLayer[];
-  metrics: CommitMetric[];
+  metrics: ProjectMetric[];
   highlights: string[];
-  featured: boolean;
+  tier: ProjectTier;
   githubUrl?: string;
 }
