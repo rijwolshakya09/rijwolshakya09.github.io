@@ -1,144 +1,170 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
-import { useScrollDirection } from "@/hooks/useScrollDirection";
+import { Container } from "@/components/ui/Container";
+import { buttonStyles } from "@/components/ui/Button";
 import { useActiveSection } from "@/hooks/useActiveSection";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { NAV_LINKS } from "@/lib/constants";
+import { CV_PATH, NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-const SECTION_IDS = NAV_LINKS.map((l) => l.href.replace("#", ""));
+const SECTION_IDS = NAV_LINKS.map((l) => l.href.slice(1));
 
 export function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const direction = useScrollDirection();
   const active = useActiveSection(SECTION_IDS);
-  const reduced = useReducedMotion();
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const sheetRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
-    setMenuOpen(false);
-    const el = document.querySelector(href);
-    el?.scrollIntoView({ behavior: "smooth" });
+  useEffect(() => {
+    if (!open) return;
+    document.body.style.overflow = "hidden";
+    sheetRef.current?.querySelector<HTMLElement>("a, button")?.focus();
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  const close = () => {
+    setOpen(false);
+    toggleRef.current?.focus();
+  };
+
+  const onSheetKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      close();
+      return;
+    }
+    if (e.key !== "Tab" || !sheetRef.current) return;
+    const items = sheetRef.current.querySelectorAll<HTMLElement>("a, button");
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
   };
 
   return (
-    <>
-      <motion.header
-        animate={reduced ? {} : { y: direction === "down" && scrolled ? -80 : 0 }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          scrolled ? "glass border-b border-border" : "bg-transparent"
-        )}
-        role="banner"
-      >
-        <nav
-          className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
-          aria-label="Main navigation"
-        >
-          {/* Logo */}
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="text-lg font-bold gradient-text hover:opacity-80 transition-opacity"
-            aria-label="Scroll to top"
-          >
-            RS
-          </button>
+    <header
+      className={cn(
+        "sticky top-0 z-50 border-b transition-colors",
+        scrolled ? "border-line bg-background" : "border-transparent bg-transparent"
+      )}
+    >
+      <Container className="flex h-16 items-center justify-between">
+        <a href="#hero" className="flex min-h-12 items-center font-display text-lg font-extrabold">
+          Rijwol Shakya
+        </a>
 
-          {/* Desktop nav */}
-          <ul className="hidden md:flex items-center gap-1" role="list">
-            {NAV_LINKS.map((link) => {
-              const sectionId = link.href.replace("#", "");
-              const isActive = active === sectionId;
-              return (
-                <li key={link.href}>
-                  <button
-                    onClick={() => handleNavClick(link.href)}
-                    className={cn(
-                      "relative px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 min-h-[48px]",
-                      isActive
-                        ? "text-primary"
-                        : "text-muted hover:text-foreground"
-                    )}
-                    aria-current={isActive ? "page" : undefined}
-                  >
-                    {isActive && (
-                      <motion.span
-                        layoutId="nav-pill"
-                        className="absolute inset-0 rounded-full bg-primary/10"
-                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                        aria-hidden
-                      />
-                    )}
-                    <span className="relative">{link.label}</span>
-                  </button>
-                </li>
-              );
-            })}
+        <nav aria-label="Main" className="hidden md:block">
+          <ul className="flex items-center gap-1">
+            {NAV_LINKS.map((l) => (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  aria-current={active === l.href.slice(1) ? "true" : undefined}
+                  className={cn(
+                    "flex min-h-12 items-center rounded-full px-4 text-sm font-medium transition-colors",
+                    active === l.href.slice(1) ? "text-primary" : "text-muted hover:text-foreground"
+                  )}
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
           </ul>
-
-          {/* Right side */}
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface-muted text-muted hover:text-foreground transition-colors min-w-[48px] min-h-[48px]"
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={menuOpen}
-            >
-              {menuOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
-          </div>
         </nav>
-      </motion.header>
 
-      {/* Mobile Drawer */}
+        <div className="flex items-center gap-1">
+          <a href={CV_PATH} download className={buttonStyles({ variant: "outline", size: "sm", className: "hidden md:inline-flex" })}>
+            CV
+          </a>
+          <ThemeToggle />
+          <button
+            ref={toggleRef}
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label="Open menu"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            className="flex h-12 w-12 items-center justify-center rounded-full text-foreground md:hidden"
+          >
+            <Menu size={20} aria-hidden />
+          </button>
+        </div>
+      </Container>
+
       <AnimatePresence>
-        {menuOpen && (
+        {open && (
           <>
             <motion.div
+              key="backdrop"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setMenuOpen(false)}
-              className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+              onClick={close}
+              className="fixed inset-0 z-40 bg-foreground/40 md:hidden"
               aria-hidden
             />
             <motion.div
+              key="sheet"
+              ref={sheetRef}
+              id="mobile-menu"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Menu"
+              onKeyDown={onSheetKeyDown}
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed bottom-0 left-0 right-0 z-50 glass rounded-t-3xl border-t border-border px-6 py-8 md:hidden"
-              role="dialog"
-              aria-label="Mobile navigation"
+              transition={{ type: "spring", stiffness: 320, damping: 32 }}
+              className="fixed inset-x-0 bottom-0 z-50 rounded-t-3xl border-t border-line bg-surface px-4 pb-8 pt-4 md:hidden"
             >
-              <ul className="flex flex-col gap-2" role="list">
-                {NAV_LINKS.map((link) => (
-                  <li key={link.href}>
-                    <button
-                      onClick={() => handleNavClick(link.href)}
-                      className="w-full rounded-xl px-4 py-4 text-left text-base font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors min-h-[48px]"
+              <ul className="flex flex-col">
+                {NAV_LINKS.map((l) => (
+                  <li key={l.href}>
+                    <a
+                      href={l.href}
+                      onClick={() => setOpen(false)}
+                      className="flex min-h-14 items-center rounded-xl px-3 font-display text-2xl font-extrabold"
                     >
-                      {link.label}
-                    </button>
+                      {l.label}
+                    </a>
                   </li>
                 ))}
+                <li>
+                  <a href={CV_PATH} download className="flex min-h-14 items-center rounded-xl px-3 text-lg font-semibold text-primary">
+                    Download CV
+                  </a>
+                </li>
               </ul>
+              <button
+                type="button"
+                onClick={close}
+                aria-label="Close menu"
+                className="absolute right-3 top-3 flex h-12 w-12 items-center justify-center rounded-full"
+              >
+                <X size={20} aria-hidden />
+              </button>
             </motion.div>
           </>
         )}
       </AnimatePresence>
-    </>
+    </header>
   );
 }
