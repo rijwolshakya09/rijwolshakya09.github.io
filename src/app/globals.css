@@ -13,6 +13,13 @@
   --cyan: #22d3ee;
   --fuchsia: #e879f9;
   --emerald: #10b981;
+  /* AA-safe text variants of the accents, and the gradient stops behind white text */
+  --indigo-text: #a5b4fc;
+  --cyan-text: #22d3ee;
+  --emerald-text: #6ee7b7;
+  --fuchsia-text: #f0abfc;
+  --btn-from: #4f46e5;
+  --btn-to: #0e7490;
   --glass-bg: linear-gradient(160deg, #ffffff12, #ffffff05);
   --glass-border: #ffffff1a;
   --glass-solid: #0c1230f2;
@@ -34,6 +41,12 @@
   --cyan: #0891b2;
   --fuchsia: #c026d3;
   --emerald: #059669;
+  --indigo-text: #4338ca;
+  --cyan-text: #0e7490;
+  --emerald-text: #047857;
+  --fuchsia-text: #a21caf;
+  --btn-from: #4f46e5;
+  --btn-to: #0e7490;
   --glass-bg: linear-gradient(160deg, #ffffffcc, #ffffff99);
   --glass-border: #0f143014;
   --glass-solid: #ffffffee;

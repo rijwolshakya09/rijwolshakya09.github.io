@@ -27,7 +27,7 @@
   .aurora-section { position: relative; padding: 90px 56px; max-width: 1240px; margin: 0 auto; }
   .sec { font-family: var(--font-display); font-weight: 800; font-size: clamp(30px, 4vw, 40px); letter-spacing: -0.02em; margin: 0 0 6px; line-height: 1.1; }
   .eyebrow {
-    display: inline-flex; gap: 8px; align-items: center; font-size: 12px; color: var(--indigo);
+    display: inline-flex; gap: 8px; align-items: center; font-size: 12px; color: var(--indigo-text);
     padding: 6px 12px; border-radius: 999px; margin-bottom: 14px;
     background: color-mix(in oklab, var(--indigo) 12%, transparent);
     border: 1px solid color-mix(in oklab, var(--indigo) 25%, transparent);
@@ -45,7 +45,7 @@
     transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   /* Soft glow via radial gradient (no filter: blur — far cheaper to paint). Colour comes from --c. */
-  .blob { position: absolute; box-sizing: content-box; padding: 90px; margin: -90px; border-radius: 50%; opacity: 0.6; z-index: -1; pointer-events: none; background: radial-gradient(circle, color-mix(in oklab, var(--c) 75%, transparent) 0%, color-mix(in oklab, var(--c) 25%, transparent) 40%, transparent 70%); }
+  .blob { position: absolute; box-sizing: content-box; padding: 150px; margin: -150px; border-radius: 50%; opacity: 0.85; z-index: -1; pointer-events: none; background: radial-gradient(circle, color-mix(in oklab, var(--c) 80%, transparent) 0%, color-mix(in oklab, var(--c) 45%, transparent) 30%, color-mix(in oklab, var(--c) 12%, transparent) 55%, transparent 72%); }
   .stars {
     position: absolute; inset: 0; z-index: -1; pointer-events: none;
     background-image: radial-gradient(var(--dot) 1px, transparent 1px); background-size: 28px 28px;
@@ -61,7 +61,7 @@
   .btn:hover { transform: translateY(-2px) scale(1.02); }
   .btn:disabled { opacity: 0.5; pointer-events: none; }
   .b1 {
-    background: linear-gradient(90deg, var(--indigo), var(--cyan)); color: var(--on-accent);
+    background: linear-gradient(90deg, var(--btn-from), var(--btn-to)); color: var(--on-accent);
     box-shadow: 0 10px 30px -8px var(--indigo);
   }
   .b2 { border: 1px solid color-mix(in oklab, var(--foreground) 20%, transparent); background: var(--chip-bg); color: var(--foreground); }
@@ -81,7 +81,7 @@
   }
   .nav-link { position: relative; display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 999px; color: var(--muted-2); transition: color 0.2s; }
   .nav-link:hover { color: var(--foreground); }
-  .nav-link[aria-current="true"] { color: var(--cyan); }
+  .nav-link[aria-current="true"] { color: var(--cyan-text); }
   .nav-link .nav-active { position: absolute; inset: 0; border-radius: 999px; background: color-mix(in oklab, var(--cyan) 12%, transparent); z-index: -1; }
   .sheet { background: var(--glass-solid); border-top: 1px solid var(--glass-border); }
 
@@ -91,11 +91,11 @@
   .pill {
     display: inline-flex; gap: 8px; align-items: center; font-size: 12px; padding: 7px 14px; border-radius: 999px;
     background: color-mix(in oklab, var(--emerald) 14%, transparent);
-    border: 1px solid color-mix(in oklab, var(--emerald) 35%, transparent); color: var(--emerald);
+    border: 1px solid color-mix(in oklab, var(--emerald) 35%, transparent); color: var(--emerald-text);
   }
   .ping { width: 8px; height: 8px; border-radius: 50%; background: var(--emerald); animation: ping 1.6s infinite; box-shadow: 0 0 0 0 color-mix(in oklab, var(--emerald) 65%, transparent); }
   .hero h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(40px, 5.4vw, 58px); line-height: 1.02; margin: 16px 0 6px; letter-spacing: -0.02em; }
-  .type { font-family: var(--font-display); font-size: 22px; color: var(--indigo); min-height: 30px; }
+  .type { font-family: var(--font-display); font-size: 22px; color: var(--indigo-text); min-height: 30px; }
   .caret { display: inline-block; width: 2px; height: 22px; background: var(--cyan); vertical-align: -3px; margin-left: 2px; animation: blink 1s steps(1) infinite; }
   .hero-intro { color: var(--muted-2); font-size: 15.5px; line-height: 1.6; max-width: 44ch; margin: 14px 0 0; }
   .ctas { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px; }
@@ -130,7 +130,7 @@
   .soc:hover { transform: translateY(-3px) scale(1.05); color: #fff; }
   .soc.gh:hover { background: #24292f; box-shadow: 0 10px 26px -6px color-mix(in oklab, #24292f 80%, transparent); }
   .soc.li:hover { background: #0a66c2; box-shadow: 0 10px 26px -6px color-mix(in oklab, #0a66c2 80%, transparent); }
-  .soc.ml:hover { background: linear-gradient(135deg, var(--indigo), var(--cyan)); box-shadow: 0 10px 26px -6px var(--cyan); }
+  .soc.ml:hover { background: linear-gradient(135deg, var(--btn-from), var(--btn-to)); box-shadow: 0 10px 26px -6px var(--cyan); }
   .socials.sm { margin: 0; }
   .socials.sm .soc { width: 40px; height: 40px; border-radius: 12px; }
 
@@ -160,7 +160,7 @@
 
   /* ── Work ────────────────────────────────────────────── */
   .feature { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 30px; padding: 34px; align-items: center; perspective: 1200px; }
-  .feature-eyebrow { color: var(--cyan); font-weight: 700; font-size: 12px; letter-spacing: 0.02em; }
+  .feature-eyebrow { color: var(--cyan-text); font-weight: 700; font-size: 12px; letter-spacing: 0.02em; }
   .tag { display: inline-block; font-size: 11.5px; padding: 5px 10px; border-radius: 8px; background: var(--chip-bg); border: 1px solid var(--glass-border); margin: 3px 4px 0 0; color: var(--muted-2); }
   .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0; }
   .metrics > div { padding: 12px; border-radius: 14px; background: var(--chip-bg); border: 1px solid var(--chip-border); font-size: 11px; color: var(--muted); }
@@ -192,15 +192,15 @@
   .pgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
   .pgrid.two { grid-template-columns: repeat(2, 1fr); }
   .pcard { position: relative; padding: 22px; transform-style: preserve-3d; transition: transform 0.2s ease-out, border-color 0.3s; }
-  .pcard:hover {
-    border-color: color-mix(in oklab, var(--cyan) 40%, transparent);
-    transform: perspective(800px) rotateY(calc(var(--px, 0) * 12deg)) rotateX(calc(var(--py, 0) * -12deg)) translateY(-4px);
+  .pcard:hover { border-color: color-mix(in oklab, var(--cyan) 40%, transparent); }
+  @media (hover: hover) {
+    .pcard:hover { transform: perspective(800px) rotateY(calc(var(--px, 0) * 12deg)) rotateX(calc(var(--py, 0) * -12deg)) translateY(-4px); }
   }
   .pcard h3 { font-family: var(--font-display); margin: 0 0 4px; font-size: 17px; }
   .pcard p { color: var(--muted); font-size: 13px; line-height: 1.55; margin: 8px 0 10px; }
   .phead { display: flex; gap: 12px; align-items: center; margin-bottom: 10px; }
   .phead img, .phead .ico { width: 48px; height: 48px; border-radius: 13px; object-fit: cover; flex: none; }
-  .phead .ico { display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; background: color-mix(in oklab, var(--indigo) 20%, transparent); color: var(--indigo); }
+  .phead .ico { display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; background: color-mix(in oklab, var(--indigo) 20%, transparent); color: var(--indigo-text); }
   .phead h3 { margin: 0; }
   .phead small { color: var(--muted); font-size: 12px; }
   .minis { display: flex; gap: 6px; margin: 4px 0 12px; }
@@ -208,7 +208,7 @@
   .pcard:hover .minis img:nth-child(1) { transform: rotate(-4deg) translateY(-4px); }
   .pcard:hover .minis img:nth-child(3) { transform: rotate(4deg) translateY(-4px); }
   .pfoot { display: flex; gap: 6px; align-items: center; margin-top: 12px; flex-wrap: wrap; }
-  .more { margin-left: auto; font-size: 12.5px; color: var(--cyan); font-weight: 700; min-height: 44px; padding: 0 4px; background: none; border: 0; cursor: pointer; }
+  .more { margin-left: auto; font-size: 12.5px; color: var(--cyan-text); font-weight: 700; min-height: 44px; padding: 0 4px; background: none; border: 0; cursor: pointer; }
   .chip-store {
     display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 700; padding: 6px 10px 6px 7px; min-height: 32px;
     border-radius: 9px; color: #fff; background: #000; border: 1px solid color-mix(in oklab, #fff 20%, transparent); transition: transform 0.2s;
@@ -239,7 +239,7 @@
   .info-grid > div { padding: 10px 12px; border-radius: 12px; background: var(--chip-bg); border: 1px solid var(--chip-border); font-size: 13px; color: var(--foreground); }
   .info-grid small { display: block; font-size: 10.5px; color: var(--muted); margin-bottom: 2px; }
   .noshots { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; height: 300px; text-align: center; color: var(--muted); padding: 20px; }
-  .noshots .ico { width: 64px; height: 64px; display: grid; place-items: center; border-radius: 16px; font-family: var(--font-display); font-weight: 800; background: color-mix(in oklab, var(--indigo) 20%, transparent); color: var(--indigo); }
+  .noshots .ico { width: 64px; height: 64px; display: grid; place-items: center; border-radius: 16px; font-family: var(--font-display); font-weight: 800; background: color-mix(in oklab, var(--indigo) 20%, transparent); color: var(--indigo-text); }
   .showcase { position: sticky; top: 0; display: grid; grid-template-columns: 1fr 64px; grid-template-rows: auto auto; gap: 14px; align-items: start; perspective: 1100px; }
   .sc-phone {
     position: relative; width: 230px; aspect-ratio: 9 / 19.3; justify-self: center; border-radius: 38px; background: var(--phone); padding: 9px; overflow: hidden;
@@ -260,14 +260,14 @@
   .sc-th:hover { opacity: 0.8; transform: translateX(-3px); }
   .sc-th[aria-current="true"] { opacity: 1; border-color: var(--cyan); box-shadow: 0 0 18px color-mix(in oklab, var(--cyan) 40%, transparent); }
   .sc-count { grid-column: 1 / -1; text-align: center; font-family: var(--font-display); color: var(--muted-2); font-size: 13px; }
-  .sc-count b { color: var(--cyan); font-size: 18px; }
+  .sc-count b { color: var(--cyan-text); font-size: 18px; }
   .sc-count span { display: block; font-family: var(--font-sans); font-size: 11px; color: var(--muted); margin-top: 2px; }
 
   /* ── Experience timeline ─────────────────────────────── */
   .tabs { position: relative; display: inline-flex; padding: 5px; border-radius: 999px; background: var(--chip-bg); border: 1px solid var(--glass-border); margin-bottom: 40px; }
   .tb { position: relative; z-index: 1; border: 0; background: none; color: var(--muted); font: 700 13.5px var(--font-sans); padding: 0 22px; min-height: 44px; border-radius: 999px; cursor: pointer; transition: color 0.3s; }
   .tb[aria-selected="true"] { color: var(--on-accent); }
-  .tabpill { position: absolute; inset: 0; border-radius: 999px; background: linear-gradient(90deg, var(--indigo), var(--cyan)); z-index: -1; }
+  .tabpill { position: absolute; inset: 0; border-radius: 999px; background: linear-gradient(90deg, var(--btn-from), var(--btn-to)); z-index: -1; }
   .tl { position: relative; max-width: 880px; margin: 0 auto; }
   .tl .line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: var(--chip-border); transform: translateX(-50%); }
   .tl .line i { position: absolute; inset: 0; background: linear-gradient(var(--indigo), var(--cyan), var(--fuchsia)); transform-origin: top; }
@@ -296,9 +296,9 @@
   .ring2::before { content: ""; position: absolute; inset: 6px; border-radius: 50%; background: var(--glass-solid); }
   .ring2 img { position: relative; width: 38px; height: 38px; background: #fff; border-radius: 10px; padding: 6px; }
   .cc b { font-family: var(--font-display); font-size: 14px; }
-  .lv { font-style: normal; font-size: 11px; padding: 3px 10px; border-radius: 999px; background: color-mix(in oklab, var(--cyan) 14%, transparent); color: var(--cyan); }
-  .lv.p { background: linear-gradient(90deg, var(--indigo), var(--cyan)); color: var(--on-accent); }
-  .lv.g { background: color-mix(in oklab, var(--fuchsia) 14%, transparent); color: var(--fuchsia); }
+  .lv { font-style: normal; font-size: 11px; padding: 3px 10px; border-radius: 999px; background: color-mix(in oklab, var(--cyan) 14%, transparent); color: var(--cyan-text); }
+  .lv.p { background: linear-gradient(90deg, var(--btn-from), var(--btn-to)); color: var(--on-accent); }
+  .lv.g { background: color-mix(in oklab, var(--fuchsia) 14%, transparent); color: var(--fuchsia-text); }
   .sgrid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   .scard { padding: 24px; }
   .scard h3 { font-family: var(--font-display); font-size: 16px; margin: 0 0 14px; display: flex; gap: 10px; align-items: center; }
@@ -313,7 +313,7 @@
   /* ── Contact ─────────────────────────────────────────── */
   .cgrid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 16px; }
   .info { display: flex; gap: 14px; align-items: center; padding: 16px 18px; margin-bottom: 12px; min-height: 76px; color: var(--foreground); }
-  .info i { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, var(--indigo), var(--cyan)); font-style: normal; color: #fff; flex: none; }
+  .info i { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, var(--btn-from), var(--btn-to)); font-style: normal; color: #fff; flex: none; }
   .info small { display: block; color: var(--muted); font-size: 11.5px; }
   .info-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .soc-card { transition: transform 0.25s, border-color 0.25s; }
@@ -330,9 +330,9 @@
   .field input:focus, .field textarea:focus { border-color: var(--cyan); box-shadow: 0 0 0 4px color-mix(in oklab, var(--cyan) 15%, transparent); }
   .field label { position: absolute; left: 14px; top: 15px; font-size: 13.5px; color: var(--muted); transition: all 0.2s; pointer-events: none; }
   .field input:focus + label, .field input:not(:placeholder-shown) + label,
-  .field textarea:focus + label, .field textarea:not(:placeholder-shown) + label { top: 5px; font-size: 10.5px; color: var(--cyan); }
+  .field textarea:focus + label, .field textarea:not(:placeholder-shown) + label { top: 5px; font-size: 10.5px; color: var(--cyan-text); }
   .field[data-invalid="true"] input, .field[data-invalid="true"] textarea { border-color: color-mix(in oklab, var(--fuchsia) 70%, transparent); }
-  .field-error { margin-top: 4px; font-size: 12.5px; color: var(--fuchsia); }
+  .field-error { margin-top: 4px; font-size: 12.5px; color: var(--fuchsia-text); }
 
   /* ── Footer ──────────────────────────────────────────── */
   .ft {
@@ -365,6 +365,10 @@
     .job, .job.r { width: auto; margin-left: 32px; }
     .job .dot, .job:not(.r) .dot, .job.r .dot { left: -31px; right: auto; }
     .ft { flex-direction: column; padding: 26px 16px; text-align: center; }
+    .chip-store { min-height: 48px; padding: 0 12px 0 10px; }
+    .socials.sm .soc { width: 48px; height: 48px; }
+    .more, .tb { min-height: 48px; }
+    .x { width: 48px; height: 48px; }
   }
   @media (max-width: 640px) {
     .modal { padding: 0; align-items: stretch; }

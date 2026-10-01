@@ -45,4 +45,26 @@ describe("Case study modal", () => {
     expect(within(dialog).getAllByText(/Internal release/).length).toBeGreaterThan(0);
     expect(within(dialog).queryByRole("link")).not.toBeInTheDocument();
   });
+
+  it("still closes on Esc after a mouse click on non-focusable content", async () => {
+    const user = userEvent.setup();
+    render(<ProjectsSection />);
+    const trigger = screen.getAllByRole("button", { name: /^Case study/ })[0];
+    await user.click(trigger);
+    const dialog = await screen.findByRole("dialog", { name: "Bizlevate" });
+    await user.click(within(dialog).getByText(/corporate HR app/));
+    (document.activeElement as HTMLElement | null)?.blur();
+    await user.keyboard("{Escape}");
+    await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
+    expect(trigger).toHaveFocus();
+  });
+
+  it("pulls focus back into the dialog if it escapes", async () => {
+    const user = userEvent.setup();
+    render(<><a href="#outside">outside</a><ProjectsSection /></>);
+    await user.click(screen.getAllByRole("button", { name: /^Case study/ })[0]);
+    const dialog = await screen.findByRole("dialog", { name: "Bizlevate" });
+    screen.getByRole("link", { name: "outside", hidden: true }).focus();
+    await waitFor(() => expect(dialog.contains(document.activeElement)).toBe(true));
+  });
 });

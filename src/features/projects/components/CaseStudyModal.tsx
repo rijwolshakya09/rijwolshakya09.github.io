@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type KeyboardEvent, type MouseEvent } from "react";
+import { useEffect, useRef, type MouseEvent } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
@@ -21,6 +21,11 @@ export function CaseStudyModal({
   const boxRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
 
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     closeRef.current?.focus();
@@ -30,24 +35,39 @@ export function CaseStudyModal({
     };
   }, [returnFocusTo]);
 
-  const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Escape") {
-      e.preventDefault();
-      onClose();
-      return;
-    }
-    if (e.key !== "Tab" || !boxRef.current) return;
-    const items = boxRef.current.querySelectorAll<HTMLElement>("a[href], button:not([disabled])");
-    const first = items[0];
-    const last = items[items.length - 1];
-    if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault();
-      last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault();
-      first.focus();
-    }
-  };
+  // Document-level so Esc and the Tab trap keep working after a click moves focus to <body>.
+  useEffect(() => {
+    const focusables = () => boxRef.current?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])") ?? [];
+    const onKey = (e: globalThis.KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onCloseRef.current();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const items = focusables();
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      const inside = boxRef.current?.contains(document.activeElement) ?? false;
+      if (e.shiftKey && (!inside || document.activeElement === first)) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && (!inside || document.activeElement === last)) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    const onFocusIn = (e: FocusEvent) => {
+      if (boxRef.current && e.target instanceof Node && !boxRef.current.contains(e.target)) closeRef.current?.focus();
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("focusin", onFocusIn);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("focusin", onFocusIn);
+    };
+  }, []);
 
   const onBackdrop = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) onClose();
@@ -59,7 +79,6 @@ export function CaseStudyModal({
     <motion.div
       className="modal"
       onMouseDown={onBackdrop}
-      onKeyDown={onKeyDown}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -70,6 +89,7 @@ export function CaseStudyModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
+        tabIndex={-1}
         className="glass mbox"
         initial={{ scale: 0.92, y: 20 }}
         animate={{ scale: 1, y: 0 }}
