@@ -1,23 +1,24 @@
 import { describe, expect, it } from "vitest";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { EXPERIENCE_DATA } from "./data/experience.data";
 import { ExperienceSection } from "./components/ExperienceSection";
 
-describe("Experience changelog", () => {
-  it("lists releases newest first as v3.0, v2.0, v1.0", () => {
+describe("ExperienceSection", () => {
+  it("shows detailed CV-style roles by default", () => {
     render(<ExperienceSection />);
-    const releases = screen.getAllByRole("listitem").filter((li) => /^v\d\.\d/.test(li.textContent ?? ""));
-    expect(releases.map((li) => li.textContent?.slice(0, 4))).toEqual(["v3.0", "v2.0", "v1.0"]);
+    expect(EXPERIENCE_DATA.map((e) => e.responsibilities.length)).toEqual([6, 6, 3]);
+    expect(screen.getByRole("tab", { name: "Experience" })).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByText("Mobile Application Developer")).toBeInTheDocument();
+    expect(screen.getByText(/365 commits of my own/)).toBeInTheDocument();
   });
-
-  it("keeps each role to at most four bullets", () => {
-    for (const e of EXPERIENCE_DATA) expect(e.responsibilities.length).toBeLessThanOrEqual(4);
-  });
-
-  it("shows education with the MSc in progress", () => {
+  it("switches to Education by click and arrow key", async () => {
+    const user = userEvent.setup();
     render(<ExperienceSection />);
-    const edu = screen.getByRole("region", { name: "Education" });
-    expect(within(edu).getByText(/MSc Data Science/)).toBeInTheDocument();
-    expect(within(edu).getByText(/present/)).toBeInTheDocument();
+    await user.click(screen.getByRole("tab", { name: "Education" }));
+    expect(screen.getByText(/MSc Data Science/)).toBeVisible();
+    screen.getByRole("tab", { name: "Education" }).focus();
+    await user.keyboard("{ArrowLeft}");
+    expect(screen.getByRole("tab", { name: "Experience" })).toHaveAttribute("aria-selected", "true");
   });
 });

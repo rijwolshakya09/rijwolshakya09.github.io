@@ -1,6 +1,5 @@
 export interface ExperienceEntry {
   id: string;
-  version: string;
   role: string;
   company: string;
   location: string;
@@ -16,4 +15,5 @@ export interface EducationEntry {
   institution: string;
   period: string;
   current: boolean;
+  focus: string;
 }
