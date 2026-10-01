@@ -30,8 +30,15 @@ export function Header() {
     if (!open) return;
     document.body.style.overflow = "hidden";
     sheetRef.current?.querySelector<HTMLElement>("a, button")?.focus();
+    // The sheet is md:hidden — if the viewport grows (e.g. tablet rotation), close it so scroll isn't stuck locked.
+    const desktop = window.matchMedia("(min-width: 768px)");
+    const onViewportChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setOpen(false);
+    };
+    desktop.addEventListener("change", onViewportChange);
     return () => {
       document.body.style.overflow = "";
+      desktop.removeEventListener("change", onViewportChange);
     };
   }, [open]);
 

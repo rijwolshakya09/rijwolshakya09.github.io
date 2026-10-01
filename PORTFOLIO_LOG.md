@@ -269,6 +269,8 @@ Spec: `docs/superpowers/specs/2026-10-01-portfolio-redesign-design.md` · Plan: 
 
 The domain's current nameservers (`ns1/2/3.epizy.com`) do not respond, so the domain does not resolve at all (observed 2026-10-01).
 
+> ⚠️ **Do not merge `redesign` into `master` until step 4 passes.** The branch ships `public/CNAME`; the first deploy makes `rijwolshakya09.github.io` redirect to `rijwol.com.np`, which would take the portfolio offline while DNS is still broken.
+
 1. **Cloudflare:** add site `rijwol.com.np` on the Free plan.
 2. **Cloudflare DNS** (all *DNS only*, grey cloud): `A @ 185.199.108.153`, `A @ 185.199.109.153`, `A @ 185.199.110.153`, `A @ 185.199.111.153`, `CNAME www rijwolshakya09.github.io`.
 3. **register.com.np:** replace the `epizy.com` nameservers with Cloudflare's two (manual approval, ~1–2 days).
