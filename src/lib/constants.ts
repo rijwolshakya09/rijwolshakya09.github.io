@@ -24,3 +24,6 @@ export const SOCIAL_LINKS = {
   linkedin: "https://linkedin.com/in/rijwol-shakya-79411a217/",
   email: "mailto:shakyarijwol19@gmail.com",
 } as const;
+
+export const CV_PATH = "/Rijwol_Shakya_CV.pdf";
+export const AVAILABILITY = "Available for remote Flutter roles · Kathmandu, UTC+5:45";
