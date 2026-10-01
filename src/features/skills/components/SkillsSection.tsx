@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { CORE_SKILLS, SKILL_GROUPS } from "../data/skills.data";
@@ -7,7 +8,7 @@ import { SkillGroupCard } from "./SkillGroupCard";
 export function SkillsSection() {
   return (
     <section id="skills" aria-labelledby="skills-heading" className="aurora-section">
-      <div aria-hidden="true" className="blob" style={{ width: 380, height: 380, background: "var(--fuchsia)", right: -140, top: 120, opacity: 0.18 }} />
+      <div aria-hidden="true" className="blob" style={{ width: 380, height: 380, "--c": "var(--fuchsia)", right: -140, top: 120, opacity: 0.18 } as CSSProperties} />
       <SectionHeader
         id="skills-heading"
         eyebrow="Skills"

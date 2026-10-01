@@ -9,7 +9,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Customer self-service app · Flutter",
     category: "Production · Flutter",
     tier: "feature",
-    icon: "/apps/mydishhome/icon.png",
+    icon: "/apps/mydishhome/icon.webp",
     cardDescription:
       "Production Flutter app for DishHome subscribers to manage TV and broadband: four payment gateways, real-time technician tracking, loyalty rewards and biometric login.",
     cardTags: ["Flutter", "GetX", "Firebase", "FCM"],
@@ -86,7 +86,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Corporate attendance & leave management · Flutter",
     category: "Attendance & leave · Flutter",
     tier: "card",
-    icon: "/apps/bizlevate/icon.png",
+    icon: "/apps/bizlevate/icon.webp",
     cardDescription:
       "Offline-first corporate attendance and leave management, with Riverpod state and Hive caching so check-ins work without a network.",
     cardTags: ["Riverpod", "Hive", "REST"],
@@ -141,7 +141,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Sales operations app · Flutter",
     category: "Sales operations · Flutter",
     tier: "card",
-    icon: "/apps/salesmania/icon.png",
+    icon: "/apps/salesmania/icon.webp",
     cardDescription:
       "Sales team tracking app built on MVVM, with Riverpod view models and pixel-perfect Figma implementation, released on both stores.",
     cardTags: ["MVVM", "Riverpod", "Figma"],
@@ -196,7 +196,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Personal finance app · Flutter",
     category: "Personal finance · Flutter",
     tier: "card",
-    icon: "/apps/finance-tracker/icon.png",
+    icon: "/apps/finance-tracker/icon.webp",
     cardDescription: "Supabase-backed finance app with receipt OCR, a recurring-rules engine, bill splitting, PDF reports and cross-device sync.",
     cardTags: ["Supabase", "OCR", "36+ tests"],
     overview:

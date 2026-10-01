@@ -65,7 +65,7 @@ export function Header() {
       transition={{ type: "spring", stiffness: 260, damping: 30 }}
     >
       <div className="nav-pill">
-        <a href="#hero" className="grad mr-2 font-display text-base font-extrabold" aria-label="Back to top">
+        <a href="#hero" className="grad mr-2 font-display text-base font-extrabold" aria-label="RS, back to top">
           RS
         </a>
 

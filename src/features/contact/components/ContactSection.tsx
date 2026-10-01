@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -8,7 +9,7 @@ import { ContactForm } from "./ContactForm";
 export function ContactSection() {
   return (
     <section id="contact" aria-labelledby="contact-heading" className="aurora-section">
-      <div aria-hidden="true" className="blob" style={{ width: 480, height: 480, background: "var(--indigo)", left: "30%", bottom: -200, opacity: 0.3 }} />
+      <div aria-hidden="true" className="blob" style={{ width: 480, height: 480, "--c": "var(--indigo)", left: "30%", bottom: -200, opacity: 0.3 } as CSSProperties} />
       <SectionHeader
         id="contact-heading"
         eyebrow="Contact"

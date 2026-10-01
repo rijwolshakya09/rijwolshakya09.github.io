@@ -37,8 +37,8 @@ export function ProjectCard({ project, onOpen }: { project: Project; onOpen: (tr
           <StoreChip key={s.kind} link={s} appName={project.title} />
         ))}
         {project.statusNote && <span className="status-chip">{project.statusNote}</span>}
-        <button type="button" className="more" onClick={(e) => onOpen(e.currentTarget)} aria-label={`Case study: ${project.title}`}>
-          Case study →
+        <button type="button" className="more" onClick={(e) => onOpen(e.currentTarget)}>
+          Case study<span className="sr-only">: {project.title}</span> →
         </button>
       </div>
     </article>

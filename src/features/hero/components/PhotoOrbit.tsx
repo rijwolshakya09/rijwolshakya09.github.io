@@ -7,8 +7,9 @@ export function PhotoOrbit() {
   return (
     <motion.div
       className="photoWrap"
-      initial={{ scale: 0.92 }}
-      animate={{ scale: 1 }}
+      // Translate, not scale: growing the LCP image after hydration would register a later LCP entry.
+      initial={{ y: 24 }}
+      animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 120, damping: 18, delay: 0.15 }}
     >
       <div className="orbit" aria-hidden="true">

@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { GlowCard } from "@/components/ui/GlowCard";
 import { CountUp } from "@/components/ui/CountUp";
 import { Reveal } from "@/components/ui/Reveal";
@@ -8,7 +9,7 @@ import { CommitBars } from "./CommitBars";
 export function AboutSection() {
   return (
     <section id="about" aria-labelledby="about-heading" className="aurora-section">
-      <div aria-hidden="true" className="blob" style={{ width: 360, height: 360, background: "var(--cyan)", right: -120, top: 40, opacity: 0.18 }} />
+      <div aria-hidden="true" className="blob" style={{ width: 360, height: 360, "--c": "var(--cyan)", right: -120, top: 40, opacity: 0.18 } as CSSProperties} />
       <SectionHeader
         id="about-heading"
         eyebrow="About me"

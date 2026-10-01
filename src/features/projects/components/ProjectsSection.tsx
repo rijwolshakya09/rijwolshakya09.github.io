@@ -1,5 +1,7 @@
 "use client";
 
+import type { CSSProperties } from "react";
+
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
@@ -8,7 +10,10 @@ import { CARD_PROJECTS, FEATURE_PROJECT, getProject } from "../data/projects.dat
 import type { ProjectId } from "../types";
 import { FeatureProject } from "./FeatureProject";
 import { ProjectCard } from "./ProjectCard";
-import { CaseStudyModal } from "./CaseStudyModal";
+import dynamic from "next/dynamic";
+
+// Loaded on demand: keeps the modal (and its showcase) out of the initial bundle.
+const CaseStudyModal = dynamic(() => import("./CaseStudyModal").then((m) => m.CaseStudyModal), { ssr: false });
 
 export function ProjectsSection() {
   const [openId, setOpenId] = useState<ProjectId | null>(null);
@@ -24,7 +29,7 @@ export function ProjectsSection() {
 
   return (
     <section id="work" aria-labelledby="work-heading" className="aurora-section">
-      <div aria-hidden="true" className="blob" style={{ width: 420, height: 420, background: "var(--indigo)", left: -160, top: 200, opacity: 0.22 }} />
+      <div aria-hidden="true" className="blob" style={{ width: 420, height: 420, "--c": "var(--indigo)", left: -160, top: 200, opacity: 0.22 } as CSSProperties} />
       <SectionHeader
         id="work-heading"
         eyebrow="Featured work"

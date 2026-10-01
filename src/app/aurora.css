@@ -38,16 +38,14 @@
     -webkit-background-clip: text; background-clip: text; color: transparent;
     animation: shine 6s linear infinite;
   }
-  .glass {
-    background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 22px;
-    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  }
+  .glass { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 22px; }
   .reveal-armed { opacity: 0; transform: translateY(40px) scale(0.98); }
   .reveal-armed.in {
     opacity: 1; transform: none;
     transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-  .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.45; z-index: -1; pointer-events: none; }
+  /* Soft glow via radial gradient (no filter: blur — far cheaper to paint). Colour comes from --c. */
+  .blob { position: absolute; box-sizing: content-box; padding: 90px; margin: -90px; border-radius: 50%; opacity: 0.6; z-index: -1; pointer-events: none; background: radial-gradient(circle, color-mix(in oklab, var(--c) 75%, transparent) 0%, color-mix(in oklab, var(--c) 25%, transparent) 40%, transparent 70%); }
   .stars {
     position: absolute; inset: 0; z-index: -1; pointer-events: none;
     background-image: radial-gradient(var(--dot) 1px, transparent 1px); background-size: 28px 28px;
@@ -126,7 +124,7 @@
   .socials { display: flex; gap: 12px; margin-top: 22px; }
   .soc {
     width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; color: var(--muted-2);
-    background: var(--chip-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(10px);
+    background: var(--chip-bg); border: 1px solid var(--glass-border);
     transition: transform 0.25s, color 0.25s, box-shadow 0.25s, background 0.25s;
   }
   .soc:hover { transform: translateY(-3px) scale(1.05); color: #fff; }
