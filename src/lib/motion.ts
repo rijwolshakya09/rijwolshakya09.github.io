@@ -19,3 +19,17 @@ const ktm = new Intl.DateTimeFormat("en-GB", {
 export function formatKathmanduTime(d: Date): string {
   return ktm.format(d);
 }
+
+export interface TypeState {
+  word: number;
+  chars: number;
+  deleting: boolean;
+}
+
+export function typewriterStep(s: TypeState, words: readonly string[]): { next: TypeState; delayMs: number } {
+  const len = words[s.word]?.length ?? 0;
+  if (!s.deleting && s.chars < len) return { next: { ...s, chars: s.chars + 1 }, delayMs: 70 };
+  if (!s.deleting) return { next: { ...s, deleting: true }, delayMs: 1400 };
+  if (s.chars > 0) return { next: { ...s, chars: s.chars - 1 }, delayMs: 35 };
+  return { next: { word: (s.word + 1) % words.length, chars: 0, deleting: false }, delayMs: 300 };
+}
