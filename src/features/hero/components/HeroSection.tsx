@@ -1,55 +1,60 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Container } from "@/components/ui/Container";
-import { buttonStyles } from "@/components/ui/Button";
+import { motion, type Variants } from "framer-motion";
+import { AuroraBackground } from "@/components/common/AuroraBackground";
 import { SocialButtons } from "@/components/ui/SocialButtons";
-import { PhoneDemo } from "./PhoneDemo/PhoneDemo";
-import { AVAILABILITY, CV_PATH } from "@/lib/constants";
+import { Marquee } from "@/components/ui/Marquee";
+import { TECH_NAMES } from "@/components/ui/TechLogo";
+import { buttonStyles } from "@/components/ui/Button";
+import { CV_PATH } from "@/lib/constants";
+import { PhotoOrbit } from "./PhotoOrbit";
+import { TypingRoles } from "./TypingRoles";
+
+const MARQUEE = Object.entries(TECH_NAMES).map(([icon, name]) => ({ icon, name }));
+
+// Transform-only entrance: hero text is never hidden in server HTML (it is the LCP element).
+const list: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
+const item: Variants = {
+  hidden: { y: 24 },
+  show: { y: 0, transition: { type: "spring", stiffness: 140, damping: 20 } },
+};
 
 export function HeroSection() {
   return (
-    <section id="hero" aria-labelledby="hero-heading" className="pb-20 pt-10 md:pb-28 md:pt-16">
-      <Container className="grid items-center gap-14 lg:grid-cols-[1.4fr_1fr] lg:gap-10">
-        <div>
-          <p className="flex items-center gap-2 text-sm font-medium">
-            <span className="h-2 w-2 rounded-full bg-live" aria-hidden />
-            {AVAILABILITY}
-          </p>
-          {/* Transform only — no opacity, so the LCP headline paints immediately */}
-          <motion.h1
-            id="hero-heading"
-            initial={{ y: 18 }}
-            animate={{ y: 0 }}
-            transition={{ type: "spring", stiffness: 140, damping: 22 }}
-            className="mt-5 max-w-[14ch] font-display text-5xl font-extrabold leading-[0.98] tracking-[-0.025em] sm:text-6xl lg:text-7xl"
-          >
-            I build the mobile apps people pay their bills with.
+    <section id="hero" aria-labelledby="hero-heading" className="aurora-section hero isolate">
+      <AuroraBackground />
+      <div className="hgrid">
+        <motion.div variants={list} initial="hidden" animate="show">
+          <motion.span variants={item} className="pill">
+            <span className="ping" aria-hidden="true" />
+            Open to remote Flutter roles
+          </motion.span>
+          <motion.h1 variants={item} id="hero-heading">
+            Hi, I&apos;m Rijwol{" "}
+            <br />
+            <span className="grad">Shakya</span>
           </motion.h1>
-          <p className="mt-6 max-w-[52ch] text-lg leading-relaxed text-muted">
-            Flutter developer in Kathmandu with 3+ years shipping production Android and iOS apps. Today I build a
-            self-service app that subscribers across Nepal use to pay bills and track technician visits.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a href="#work" className={buttonStyles({ size: "lg" })}>
-              See my work
+          <motion.div variants={item}>
+            <TypingRoles />
+          </motion.div>
+          <motion.p variants={item} className="hero-intro">
+            I build production Flutter apps for Android and iOS: payments, live tracking and rich push, used by subscribers across Nepal.
+          </motion.p>
+          <motion.div variants={item} className="ctas">
+            <a href="#work" className={buttonStyles({ variant: "gradient" })}>
+              View my work →
             </a>
-            <a href={CV_PATH} download className={buttonStyles({ variant: "outline", size: "lg" })}>
-              Download CV
+            <a href={CV_PATH} download className={buttonStyles({ variant: "glass" })}>
+              Download CV ↓
             </a>
+          </motion.div>
+          <motion.div variants={item}>
             <SocialButtons />
-          </div>
-        </div>
-
-        {/* Transform only — the phone must stay visible (and usable) before hydration */}
-        <motion.div
-          initial={{ y: 40 }}
-          animate={{ y: 0 }}
-          transition={{ type: "spring", stiffness: 120, damping: 20, delay: 0.25 }}
-        >
-          <PhoneDemo />
+          </motion.div>
         </motion.div>
-      </Container>
+        <PhotoOrbit />
+      </div>
+      <Marquee items={MARQUEE} />
     </section>
   );
 }
