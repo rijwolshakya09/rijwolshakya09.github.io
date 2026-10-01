@@ -41,9 +41,10 @@ export function HeroSection() {
           </div>
         </div>
 
+        {/* Transform only — the phone must stay visible (and usable) before hydration */}
         <motion.div
-          initial={{ y: 40, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          initial={{ y: 40 }}
+          animate={{ y: 0 }}
           transition={{ type: "spring", stiffness: 120, damping: 20, delay: 0.25 }}
         >
           <PhoneDemo />

@@ -2,7 +2,7 @@
 **Project:** Rijwol Shakya — Developer Portfolio  
 **Tech Stack:** Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · Framer Motion  
 **Deployment:** GitHub Pages via static export (`output: 'export'`)  
-**Last Updated:** 2026-05-20
+**Last Updated:** 2026-10-01
 
 ---
 
@@ -250,38 +250,31 @@ my-portfolio/
 
 ---
 
-### 🔴 Action Required Before Deploy
+### Session 3 — 2026-10-01: Redesign ("Pocket") + rijwol.com.np
 
-1. **Formspree Form ID** — `src/features/contact/hooks/useContactForm.ts` line 22 uses a placeholder endpoint `xpwrjqko`. You must:
-   - Go to [formspree.io](https://formspree.io) and create a free form
-   - Replace `xpwrjqko` with your real form ID
-   - Your contact email is `naruto09.uzu09@gmail.com` (set in `src/lib/formspree.ts`)
+Spec: `docs/superpowers/specs/2026-10-01-portfolio-redesign-design.md` · Plan: `docs/superpowers/plans/2026-10-01-portfolio-redesign.md` · Branch: `redesign`
 
-2. **GitHub Pages Base Path** — If your GitHub Pages URL is `https://rijwolshakya09.github.io/my-portfolio/` (not a custom domain), you must add `basePath` to `next.config.ts`:
-   ```ts
-   basePath: '/my-portfolio',
-   ```
+- **Design:** replaced indigo/violet glassmorphism with a token system (Fog/Ink/Signal blue, deep-blue dark mode), Bricolage Grotesque + Schibsted Grotesk, class-based `dark` variant, global `MotionConfig reducedMotion="user"`.
+- **Hero:** interactive, unbranded phone demo (Ticket stepper, Pay with eSewa/Khalti/FonePay, rich-push Alerts) with accessible tabs and a live region.
+- **Work:** myDishHome case study + inline-expanding cards (modal and tag filter removed). **Experience:** versioned changelog (v1.0 → v3.0) + education. **Toolkit:** 3 rows. **Contact:** "Hiring?" vs "Need an app built?" with a project field and double-submit guard.
+- **Commit figures corrected to personal numbers** — 365 commits, 189 feat, 89 fix, 29 refactor (was repo-wide 1,065 / 128 / 65 / 23). Source: `git rev-list --all --no-merges --author='rijwol.shakya@dishhome.com.np' --count` in `dmn-customer-mobile-app`. "29 feature branches" removed (team figure). Years of experience → 3+.
+- **Domain:** `public/CNAME` = `rijwol.com.np`, `SITE_METADATA.url` = `https://rijwol.com.np`, static `sitemap.xml` / `robots.txt`, canonical URL, new OG image.
+- **Removed:** About section, TechMarquee, ScrollProgress, ProjectModal, project filter, GlassCard/Badge/SectionHeading, `useScrollDirection`, `useReducedMotion`, `lib/assets.ts`, `public/icons/`, default Next SVGs.
+- **Fixed along the way:** `dark:` utilities ignored the theme toggle (no class variant); toggle no-op when theme was "system"; `FORMSPREE_ENDPOINT` held an invalid value (now the real `xykvegga` ID and actually used).
+- **Tests:** Vitest + Testing Library added (`npm test`).
 
-3. **OG Image** — `/public/og-image.png` does not exist yet. Create a 1200×630px image for social previews.
+---
 
-4. **GitHub Pages Settings** — In your GitHub repo settings → Pages → set source to `gh-pages` branch, root directory.
+### 🔴 Action Required — point rijwol.com.np at GitHub Pages
 
-### 🟡 Nice-to-Have Improvements
+The domain's current nameservers (`ns1/2/3.epizy.com`) do not respond, so the domain does not resolve at all (observed 2026-10-01).
 
-5. **Real Project Screenshots** — Add actual app screenshots to `public/projects/` and wire them into `projects.data.ts` for visual cards.
-
-6. **`src/lib/formspree.ts`** — Currently unused. The endpoint is hardcoded directly in `useContactForm.ts`. Refactor to import from `formspree.ts` for cleaner config management.
-
-7. **`/public/Rijwol_Shakya_CV.pdf`** — The CV PDF is in the project root. Copy it to `public/` so the download button works in production:
-   ```bash
-   cp Rijwol_Shakya_CV.pdf public/
-   ```
-
-8. **TypeScript path alias** — `@/*` maps to `src/*` via `tsconfig.json`. Verify this is set if you see any import resolution issues.
-
-9. **Mobile nav drawer animation** — Currently slides from bottom. Could add a left-side drawer variant for landscape mode if desired.
-
-10. **`next.config.ts` `basePath` for GitHub Pages** — Only needed if deployed under a sub-path. If using a custom domain (apex), skip this.
+1. **Cloudflare:** add site `rijwol.com.np` on the Free plan.
+2. **Cloudflare DNS** (all *DNS only*, grey cloud): `A @ 185.199.108.153`, `A @ 185.199.109.153`, `A @ 185.199.110.153`, `A @ 185.199.111.153`, `CNAME www rijwolshakya09.github.io`.
+3. **register.com.np:** replace the `epizy.com` nameservers with Cloudflare's two (manual approval, ~1–2 days).
+4. **Verify:** `dig +short rijwol.com.np` returns the four GitHub IPs.
+5. **GitHub:** repo Settings → Pages → Custom domain → `rijwol.com.np` → Save → wait for DNS check → enable **Enforce HTTPS**.
+6. **Search Console:** add Domain property `rijwol.com.np`, verify via TXT in Cloudflare, submit `https://rijwol.com.np/sitemap.xml`.
 
 ---
 

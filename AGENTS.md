@@ -39,6 +39,7 @@ src/
 2. **TypeScript:** Strict typing always. Zero usage of `any`. Define deep structures for Git commits and project objects.
 3. **Tailwind & Interactivity:** Use `clsx` or `tailwind-merge` for clean conditional styles. For dynamic UI, explicitly use `'use client';` strictly where interaction happens.
 4. **Performance & Access:** Target 100/100 Core Web Vitals. Use proper semantic HTML, accessible `aria-*` tags, and responsive layouts (`sm:`, `md:`, `lg:` breakpoints).
+5. **Tests:** `npm test` (Vitest + Testing Library). Keep component logic in pure functions where possible (see `PhoneDemo/phoneDemo.logic.ts`).
 
 ## 🎨 MODERN UI & ADVANCED THEMING CONFIGURATION
 
@@ -47,7 +48,7 @@ src/
 - **No Heavy Runtimes:** Do not use runtime CSS-in-JS frameworks (like legacy MUI or Ant Design) t o prevent layout shifts on static HTML pages.
 - **Tailwind Variables:** Use pure Tailwind CSS utility classes paired with shadcn/ui or HeroUI primitives.
 - **Flicker-Free Dark/Light Mode:** Use `next-themes` with class-based routing to ensure dark mode maps instantaneously without a white flash on page load.
-- **Glassmorphism Theme:** Apply custom background filters (`backdrop-blur-md bg-white/10 dark:bg-black/20`) to create a premium depth effect.
+- **Design tokens:** Colors come only from the tokens in `src/app/globals.css` (`background, surface, foreground, muted, primary, on-primary, line, live`), with light and dark values. No glassmorphism, gradient blobs, or gradient text. Display type is Bricolage Grotesque (`font-display`); body type is Schibsted Grotesk.
 
 ### 2. Framer Motion Animation Rules
 
@@ -55,7 +56,7 @@ Every animation must feel organic, purposeful, and optimized.
 
 - **Physics-Based Over Tweens:** Use Framer Motion `spring` physics (`stiffness`, `damping`) rather than linear delays for fluid, modern movements.
 - **Micro-Interactions:** Apply subtle hover states on clickable targets (e.g., scale up by exactly `1.02`, never over-exaggerated).
-- **Scroll-Triggered Visuals:** Utilize Framer Motion's `whileInView` or `useScroll` hooks to orchestrate fade-ins and scale shifts as the recruiter scrolls down.
+- **Motion budget:** One load moment (hero), user-driven motion everywhere else, and at most one scroll reveal per page (the Experience rule). No per-section fade-ins. `MotionConfig reducedMotion="user"` is set globally in `Providers.tsx`.
 - **Layout Animations:** Protect visual flow. Use `layoutId` for smooth tab switching or layout morphs.
 - **Accessibility (Crucial):** Respect the system settings of users. Wrap all major animations or transitions within a check for `window.matchMedia('(prefers-reduced-motion: reduce)')` to disable them if requested.
 
