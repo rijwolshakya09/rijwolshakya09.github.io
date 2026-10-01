@@ -188,6 +188,18 @@
   .chip-store.ios { background:#000; border:1px solid #ffffff33 }
   .chip-store.gh { background:#24292f; border:1px solid #ffffff33 }
   .pcard:hover .chip-store { transform:translateY(-2px) }
+  .socials { display:flex; gap:12px; margin-top:22px }
+  .soc { width:48px; height:48px; border-radius:14px; display:grid; place-items:center; color:#c7d0f0; background:#ffffff0d; border:1px solid #ffffff1f; backdrop-filter:blur(10px); transition:transform .25s, color .25s, box-shadow .25s, background .25s; cursor:pointer }
+  .soc:hover { transform:translateY(-3px) scale(1.05); color:#fff }
+  .soc.gh:hover { background:#24292f; box-shadow:0 10px 26px -6px #6e7681aa }
+  .soc.li:hover { background:#0a66c2; box-shadow:0 10px 26px -6px #0a66c2cc }
+  .soc.ml:hover { background:linear-gradient(135deg,#6366f1,#22d3ee); box-shadow:0 10px 26px -6px #22d3eecc }
+  .socials.sm { margin:0 } .socials.sm .soc { width:40px; height:40px; border-radius:12px }
+  footer.ft { align-items:center }
+  .info-row { display:grid; grid-template-columns:1fr 1fr; gap:12px }
+  .soc-card { cursor:pointer; transition:transform .25s, border-color .25s } .soc-card:hover { transform:translateY(-3px) }
+  .soc-card.gh i { background:#24292f !important; color:#fff } .soc-card.li i { background:#0a66c2 !important; color:#fff }
+  .soc-card.gh:hover { border-color:#8b949e88 } .soc-card.li:hover { border-color:#0a66c2aa }
   /* SKILLS */
   .sgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px }
   .scard { padding:24px }
@@ -212,7 +224,7 @@
   @media (prefers-reduced-motion: reduce) { .site * { animation:none !important; transition:none !important } .reveal { opacity:1; transform:none } }
 </style>
 
-<h2>Aurora Glass: the full page (v9)</h2>
+<h2>Aurora Glass: the full page (v10)</h2>
 <p class="subtitle">This is the whole site top to bottom. <b>Scroll through it slowly</b>: sections animate in as they appear, the timeline draws itself, the stats count up, and project cards tilt toward your mouse. Then tell me what to change. <b>New:</b> fuller About text, detailed Experience, real app logos, screenshots and store links. <b>Click any project</b> (including the big myDishHome card) to open its case study. The Skills section is now detailed.</p>
 
 <div class="site" id="site">
@@ -232,6 +244,7 @@
         <div class="type"><span id="type"></span><span class="caret"></span></div>
         <p>I build production Flutter apps for Android and iOS: payments, live tracking and rich push, used by subscribers across Nepal.</p>
         <div class="ctas"><a class="btn b1">View my work →</a><a class="btn b2">Download CV ↓</a></div>
+        <div class="socials"><a class="soc gh" title="GitHub · rijwolshakya09"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.7 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a><a class="soc li" title="LinkedIn · Rijwol Shakya"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a><a class="soc ml" title="shakyarijwol19@gmail.com"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-10 6L2 7"/></svg></a></div>
       </div>
       <div class="photoWrap">
         <div class="orbit"><img class="o1" src="./ic-flutter.svg"><img class="o2" src="./ic-dart.svg"><img class="o3" src="./ic-firebase.svg"></div>
@@ -358,6 +371,7 @@
         <div class="glass info reveal"><i>✉</i><div><small>Email</small>shakyarijwol19@gmail.com</div></div>
         <div class="glass info reveal d1"><i>☏</i><div><small>Phone</small>+977-9861291534</div></div>
         <div class="glass info reveal d2"><i>⌖</i><div><small>Location</small>Kathmandu, Nepal · remote worldwide</div></div>
+        <div class="info-row"><a class="glass info soc-card gh reveal d3"><i><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.7 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></i><div><small>GitHub</small>@rijwolshakya09</div></a><a class="glass info soc-card li reveal d4"><i><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></i><div><small>LinkedIn</small>Rijwol Shakya</div></a></div>
       </div>
       <div class="glass form reveal d1">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="field"><input placeholder=" "><label>Your name</label></div><div class="field"><input placeholder=" "><label>Email</label></div></div>
@@ -372,7 +386,7 @@
       <button class="x" id="mx">✕</button>
       <div id="mbody"></div>
     </div></div>
-  <footer class="ft"><span>© 2026 Rijwol Shakya</span><span>Designed &amp; built with Next.js</span></footer>
+  <footer class="ft"><span>© 2026 Rijwol Shakya</span><div class="socials sm"><a class="soc gh" title="GitHub · rijwolshakya09"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.7 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a><a class="soc li" title="LinkedIn · Rijwol Shakya"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a><a class="soc ml" title="shakyarijwol19@gmail.com"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-10 6L2 7"/></svg></a></div><span>Designed &amp; built with Next.js</span></footer>
 </div>
 
 <script>

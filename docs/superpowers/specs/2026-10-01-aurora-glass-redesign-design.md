@@ -3,7 +3,7 @@
 **Date:** 2026-10-01
 **Branch:** `aurora-redesign` (from local `master` @ 906e049)
 **Supersedes:** `2026-10-01-portfolio-redesign-design.md` ("Pocket"). The user rejected that design as "too plain, like a CV".
-**Visual reference (approved):** `docs/superpowers/specs/aurora-glass-mockup/index.html` (v9). Where this spec and the mockup disagree on look and feel, the mockup wins. Where they disagree on behaviour or accessibility, this spec wins.
+**Visual reference (approved):** `docs/superpowers/specs/aurora-glass-mockup/index.html` (v10). Where this spec and the mockup disagree on look and feel, the mockup wins. Where they disagree on behaviour or accessibility, this spec wins.
 
 ## 1. Intent
 
@@ -100,7 +100,11 @@ Both fonts load through `next/font/google` with `display: swap`:
 - A typing line that cycles: Flutter Developer → Mobile Engineer → Clean Architecture fan → UI craftsman.
 - Intro paragraph.
 - CTAs "View my work →" (`#work`) and "Download CV ↓", with **34px top spacing**.
-- GitHub and LinkedIn icons.
+- A **social row** below the CTAs: three 48px glass icon buttons, each with brand hover colours:
+  - **GitHub** → `SOCIAL_LINKS.github` (`https://github.com/rijwolshakya09`), hover `#24292f`
+  - **LinkedIn** → `SOCIAL_LINKS.linkedin` (`https://linkedin.com/in/rijwol-shakya-79411a217/`), hover `#0a66c2`
+  - **Email** → `mailto:shakyarijwol19@gmail.com`, hover gradient
+  - Each has an `aria-label` ("GitHub profile", "LinkedIn profile", "Email Rijwol"); external links use `target="_blank" rel="noopener noreferrer"`.
 
 **Right column:**
 - The photo (`/images/avatar.png`, unchanged for now) in a circle (330px desktop, 240px mobile).
@@ -243,6 +247,7 @@ Eyebrow "Contact", then h2 "Let's build **something great**", then the lead line
   - Email (mailto)
   - Phone (tel)
   - Location: "Kathmandu, Nepal · remote worldwide"
+  - plus a two-column row of linked cards: **GitHub** (`@rijwolshakya09`, `#24292f` icon tile) and **LinkedIn** ("Rijwol Shakya", `#0a66c2` icon tile)
 - **Right:** a glass form with floating labels: Name, Email, Subject, Message.
   - It reuses `useContactForm`; the optional `project` field stays in the schema but isn't shown.
   - Inline zod errors.
@@ -251,7 +256,7 @@ Eyebrow "Contact", then h2 "Let's build **something great**", then the lead line
 
 ### 4.8 Footer
 
-"© {year} Rijwol Shakya" · social icons · "Designed & built with Next.js".
+"© {year} Rijwol Shakya" · the **GitHub / LinkedIn / Email** icon buttons (40px on desktop, 48px on mobile) · "Designed & built with Next.js".
 
 ## 5. Motion
 
