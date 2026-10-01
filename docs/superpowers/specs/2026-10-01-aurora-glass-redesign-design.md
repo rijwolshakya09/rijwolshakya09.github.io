@@ -82,7 +82,10 @@ Both fonts load through `next/font/google` with `display: swap`:
 
 ### 4.0 Global chrome
 
-- **Scroll progress bar:** a 3px gradient bar fixed at the top, `scaleX` bound to page scroll (Framer `useScroll`).
+- **Scroll progress bar:** a **4px** indigo → cyan → fuchsia gradient bar fixed at the very top, above the header (`z-index` above everything except the modal).
+  - It has a soft glow (`box-shadow` in cyan).
+  - `scaleX` is bound to page scroll progress (Framer `useScroll` + `useSpring` for smoothing), with `transform-origin: left`.
+  - It's always visible, and it's `aria-hidden`.
 - **Header:** a floating glass pill nav, centred: `RS` gradient monogram · About · Work · Experience · Skills · Contact · theme toggle.
   - The active section is highlighted in cyan, and a `layoutId` pill slides between items.
   - It hides on scroll down and shows on scroll up.
