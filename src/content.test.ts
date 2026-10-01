@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { PROJECTS_DATA } from "@/features/projects/data/projects.data";
+import { PROJECTS } from "@/features/projects/data/projects.data";
 import { EXPERIENCE_DATA } from "@/features/experience/data/experience.data";
 
 const BANNED = ["1,065", "1,000+", "65+ fix", "29 feature branches", "29 active feature branches", "2+ years"];
@@ -15,14 +15,14 @@ function filesUnder(dir: string): string[] {
 }
 
 describe("myDishHome figures are personal", () => {
-  const dish = PROJECTS_DATA.find((p) => p.id === "mydishhome");
+  const dish = PROJECTS.find((p) => p.id === "mydishhome");
   const metric = (label: string) => dish?.metrics.find((m) => m.label === label)?.value;
 
   it("shows my own commit counts", () => {
-    expect(metric("Commits")).toBe("365");
-    expect(metric("Features")).toBe("189");
-    expect(metric("Fixes")).toBe("89");
-    expect(metric("Refactors")).toBe("29");
+    expect(metric("my commits")).toBe("365");
+    expect(metric("features")).toBe("189");
+    expect(metric("fixes")).toBe("89");
+    expect(metric("refactors")).toBe("29");
   });
 
   it("drops the team-wide branch count", () => {
