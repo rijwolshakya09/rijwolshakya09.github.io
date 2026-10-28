@@ -14,7 +14,7 @@ export const PROJECTS: Project[] = [
       "Production Flutter app for DishHome subscribers to manage TV and broadband: four payment gateways, real-time technician tracking, loyalty rewards and biometric login.",
     cardTags: ["Flutter", "GetX", "Firebase", "FCM"],
     overview:
-      "myDishHome is the official self-service app for DishHome, one of Nepal's largest TV and broadband providers. Subscribers use it to view and pay bills, open and track support tickets, follow technician visits live, manage Wi-Fi and connected devices, and redeem loyalty offers. I build and maintain features end to end on a Clean Architecture codebase with GetX.",
+      "myDishHome is the official self-service app for DishHome, one of Nepal's largest TV and broadband providers. Subscribers use it to view and pay bills, open and track support tickets, follow technician visits live, check router health and manage Wi-Fi and connected devices, order FTTR (Fibre to the Room) plans, and redeem loyalty offers. I build and maintain features end to end on a Clean Architecture codebase with GetX.",
     stores: [
       { kind: "play", url: "https://play.google.com/store/apps/details?id=com.shirantech.dishhome" },
       { kind: "appstore", url: "https://apps.apple.com/np/app/mydishhome/id1396471022" },
@@ -35,7 +35,8 @@ export const PROJECTS: Project[] = [
       "eSewa, Khalti, FonePay & GetPay checkout",
       "Live technician ticket tracking",
       "Rich push notifications with images",
-      "Wi-Fi password & device management",
+      "Wi-Fi hub with router health, device blocking & usage history",
+      "FTTR plans, coverage check & ordering",
       "Loyalty & privilege offers",
       "Biometric login",
       "Subscription status for Internet, iTV & DTH",
@@ -45,29 +46,35 @@ export const PROJECTS: Project[] = [
       { label: "Data layer", description: "Dio API clients, Hive cache adapters and repository implementations" },
       { label: "Presentation layer", description: "GetX controllers with reactive state; stateless widgets consume Obx streams" },
     ],
-    // Personal figures from dmn-customer-mobile-app, all refs, merge commits excluded (measured 2026-10-01):
+    // Personal figures from dmn-customer-mobile-app, all refs, merge commits excluded (measured 2026-10-28):
     //   git rev-list --all --no-merges --author='rijwol.shakya@dishhome.com.np' --count
     //   git log --all --no-merges --author='rijwol.shakya@dishhome.com.np' --format=%s | grep -ciE '^feat(\(.*\))?!?:'
     //   (same grep with fix / refactor)
+    // Commits since 2026-10 have no conventional prefix, so the type split counts prefixed commits only.
     metrics: [
-      { value: "365", label: "my commits" },
+      { value: "429", label: "my commits" },
       { value: "189", label: "features" },
       { value: "89", label: "fixes" },
       { value: "29", label: "refactors" },
     ],
     contributions: [
       "Integrated four payment gateways with intent-based flows, native SDKs and POST-verified status callbacks",
+      "Redesigned the Wi-Fi section: router health hub, connected-devices management with block/unblock, SSID and password flows, usage and activity history",
+      "Led the Fibernet V2 router API migration behind a single WifiApi interface, with flag-switched V1/V2 adapters and bounded operation polling",
+      "Built the FTTR sales flow end to end: 14 screens covering plans, coverage check, consultation requests, billing and payment",
       "Built the Technician Ticket Tracking stepper showing real-time visit stages",
       "Implemented an iOS Notification Service Extension for rich push, plus FCM token refresh",
       "Built biometric login with session refresh and JWT re-authorisation for zero-logout UX",
       "Set up Firebase Crashlytics and drove crash triage across 89 fix commits",
     ],
-    techStack: ["Flutter", "Dart", "GetX", "Dio", "Hive", "Firebase Crashlytics", "FCM", "eSewa SDK", "Khalti"],
+    techStack: ["Flutter", "Dart", "GetX", "Dio", "Hive", "Firebase Crashlytics", "FCM", "WebSockets", "json_serializable", "eSewa SDK", "Khalti"],
     screenshots: shots("mydishhome", 4),
     feature: {
       eyebrow: "Production · Flutter · 1M+ downloads",
       highlights: [
         "eSewa, Khalti, FonePay & GetPay with intent flows and in-app checkout",
+        "Wi-Fi hub redesign and Fibernet V2 router API migration",
+        "FTTR sales flow: plans, coverage check, ordering and payment",
         "Technician ticket tracking with a live stepper",
         "iOS Notification Service Extension for rich push + FCM token refresh",
         "Biometric login with session refresh and JWT re-authorisation",

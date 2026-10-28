@@ -37,6 +37,6 @@ describe("projects data", () => {
     expect(getProject("hg-hub").screenshots).toEqual([]);
   });
   it("keeps personal myDishHome figures", () => {
-    expect(getProject("mydishhome").metrics.map((m) => m.value)).toEqual(["365", "189", "89", "29"]);
+    expect(getProject("mydishhome").metrics.map((m) => m.value)).toEqual(["429", "189", "89", "29"]);
   });
 });

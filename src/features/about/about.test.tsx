@@ -9,7 +9,7 @@ describe("AboutSection", () => {
     expect(screen.getByText(/3\+ years of professional experience/)).toBeInTheDocument();
     expect(screen.getByText(/1M\+ downloads/)).toBeInTheDocument();
     expect(screen.getByText(/growing my skills in/)).toBeInTheDocument();
-    expect(screen.getByText("365+")).toBeInTheDocument();
+    expect(screen.getByText("429+")).toBeInTheDocument();
     expect(screen.getByText("189")).toBeInTheDocument();
     expect(screen.getByText(/UTC\+5:45/)).toBeInTheDocument();
   });

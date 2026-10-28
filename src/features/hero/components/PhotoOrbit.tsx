@@ -20,7 +20,7 @@ export function PhotoOrbit() {
       <div className="ring" aria-hidden="true" />
       <img className="photo" src="/images/avatar.png" alt="Rijwol Shakya" width={330} height={330} fetchPriority="high" />
       <div className="badge bg1">
-        <b>365+</b>commits shipped
+        <b>429+</b>commits shipped
       </div>
       <div className="badge bg2">
         <b>3+ yrs</b>professional

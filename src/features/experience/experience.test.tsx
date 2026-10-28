@@ -10,7 +10,7 @@ describe("ExperienceSection", () => {
     expect(EXPERIENCE_DATA.map((e) => e.responsibilities.length)).toEqual([6, 6, 3]);
     expect(screen.getByRole("tab", { name: "Experience" })).toHaveAttribute("aria-selected", "true");
     expect(screen.getByText("Mobile Application Developer")).toBeInTheDocument();
-    expect(screen.getByText(/365 commits of my own/)).toBeInTheDocument();
+    expect(screen.getByText(/429 commits of my own/)).toBeInTheDocument();
   });
   it("switches to Education by click and arrow key", async () => {
     const user = userEvent.setup();

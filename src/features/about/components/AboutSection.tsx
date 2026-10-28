@@ -41,7 +41,7 @@ export function AboutSection() {
         <Reveal delay={80}>
           <GlowCard className="stat h-full">
             <small>Commits to myDishHome</small>
-            <CountUp to={365} suffix="+" className="num grad" />
+            <CountUp to={429} suffix="+" className="num grad" />
             <small>my own, merges excluded</small>
           </GlowCard>
         </Reveal>

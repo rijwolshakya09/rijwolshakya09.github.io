@@ -12,7 +12,7 @@ describe("HeroSection", () => {
     expect(screen.getByRole("link", { name: /Download CV/ })).toHaveAttribute("href", "/Rijwol_Shakya_CV.pdf");
     expect(screen.getByRole("link", { name: "GitHub profile" })).toBeInTheDocument();
     expect(screen.getByText("Open to remote Flutter roles")).toBeInTheDocument();
-    expect(screen.getByText("365+")).toBeInTheDocument();
+    expect(screen.getByText("429+")).toBeInTheDocument();
   });
 
   it("lists the tech stack for screen readers once", () => {

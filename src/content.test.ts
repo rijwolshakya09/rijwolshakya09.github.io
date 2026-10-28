@@ -19,7 +19,7 @@ describe("myDishHome figures are personal", () => {
   const metric = (label: string) => dish?.metrics.find((m) => m.label === label)?.value;
 
   it("shows my own commit counts", () => {
-    expect(metric("my commits")).toBe("365");
+    expect(metric("my commits")).toBe("429");
     expect(metric("features")).toBe("189");
     expect(metric("fixes")).toBe("89");
     expect(metric("refactors")).toBe("29");
@@ -31,7 +31,7 @@ describe("myDishHome figures are personal", () => {
 
   it("states the personal count in the current role", () => {
     const current = EXPERIENCE_DATA.find((e) => e.current);
-    expect(current?.responsibilities.some((r) => r.includes("365 commits"))).toBe(true);
+    expect(current?.responsibilities.some((r) => r.includes("429 commits"))).toBe(true);
   });
 });
 
