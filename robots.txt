@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://rijwol.com.np/sitemap.xml
